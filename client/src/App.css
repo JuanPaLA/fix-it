@@ -1,0 +1,54 @@
+.App {
+  text-align: center;
+}
+.subheader {
+  margin-top: 5vh;
+  font-style: italic;
+  
+}
+.divisor{
+  background-image: url('./line-divider.png');
+  border: solid gray;
+  /* margin-left: 3vw ;
+  margin-right: 3vw ;
+  max-width: 70%;
+  margin-top: -15vh;
+  margin-bottom: -15vh; */
+}
+
+.text-center {
+  background-color: honeydew;
+  box-shadow: 2px 2px gray;
+}
+.worker{
+  height: 10vh;
+  border-radius: 50%;
+  margin-bottom: 1vh;
+  margin-top: 2vh;
+}
+
+.user{
+  height: 10vh;
+  border-radius: 50%;
+  margin-bottom: 1vh;
+  margin-top: 2vh;
+}
+
+.App-logo {
+  margin-top: 6vh;
+  margin-bottom: 1vh;
+  border-radius: 10%;
+  height: 10vh;
+  box-shadow: 3px 3px gray;
+}
+
+.App-header {
+  background-color: #ff2445;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
