@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import {
     Collapse,
     Navbar,
@@ -34,12 +35,13 @@ class Nav2 extends Component {
       <UncontrolledDropdown style={{color: "#ed4747"}}>   
         <DropdownToggle nav caret>
           <span style={{fontSize: "1.2em", color: "white"}}>Options</span>
-          {/* <img id="litUser" src="http://www.iconarchive.com/download/i94391/bokehlicia/captiva/user.ico" alt="lticon"/> */}
         </DropdownToggle>
         
           <DropdownMenu>
             <DropdownItem>
-              Option 1
+              <Link to="/sign-in">
+                Sign-In
+              </Link>
             </DropdownItem>
             <DropdownItem>
               Option 2

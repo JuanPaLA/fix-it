@@ -6,6 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import * as serviceWorker from './serviceWorker';
 import App from './App';
 import Services from './components/services/services';
+import SignIn from './components/forms/signIn';
+import Quotes from './components/forms/quotes';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 //------------REDUX ELEMENTS------------//
 import { Provider } from "react-redux";
@@ -18,6 +20,8 @@ ReactDOM.render
       <Switch>
         <Route exact path='/' component={App} />
         <Route exact path="/services" component={Services}/>        
+        <Route path="/sign-in" component={SignIn}/>
+        <Route path="/quotes" component={Quotes}/>
       </Switch>
     </Router>
     </Provider>
