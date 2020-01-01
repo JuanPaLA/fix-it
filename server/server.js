@@ -4,13 +4,25 @@ var cors = require('cors');
 const bodyParser = require('body-parser');
 var app = express();
 
-app.use(bodyParser.json());
+
+const db = require('./config/keys').mongoURI;
+
+/*-------MIDLEWARES-----------*/
+app.use(bodyParser());
 app.use(cors());
 
-// mongoose
-//     .connect(db)
-//     .then(() => console.log('MongoDB connected'))
-//     .catch(err => console.log(err));
+mongoose
+  .connect(db)
+  .then(() => console.log('MongoDB connected mother fucker'))
+  .catch(err => console.log(err));
+
+const services = require('./routes/api/services');
+const quotes = require('./routes/api/quotes');
+
+app.use('/api', quotes);
+app.use('/api', services);
+
+
 
 const port = process.env.PORT || 5000;
 
