@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React, {Component} from 'react';
 import Nav2 from './../nav/nav';
 import Footer from './../footer/footer';
@@ -8,55 +9,90 @@ class Quotes extends Component {
     constructor(props){
         super(props);
         this.state = {
+            description: '',
+            addData: '',
+            city: '',
+            street: '',
+            number: '',
+            flat: '',
             email: '',
-            password: '',
-            login: false
+            telefono: '',
+            plazo: ''
         };
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+    async componentDidMount(){
+    
+        this.setState({
+            description: this.props.match.params.subespecialidad
+        })
+    }
+
+    handleInputChange(evt) {
+        const value =
+        evt.target.type === "checkbox" ? evt.target.checked : evt.target.value;    
+        this.setState({
+          ...this.state,
+          [evt.target.name] : value
+        });
+      }
+
+      handleSubmit(event){
+       alert(this.state.description + this.state.telefono + this.state.addData + this.state.email + this.state.number);
+       console.log(this.state.description + this.state.telefono + this.state.addData + this.state.email + this.state.number);
+       event.preventDefault();
+      }
+
     render(){
         return(
-            <div>
+            <div className="encloser">
                 <Nav2/>
-                    <div className="componentContent">
+                    <div className="componentContentForm">
 
                             {/* --------------- TYPE FORM  ------------- */}
-
-                        <Form>
+                        <Form onSubmit={this.handleSubmit}>                    
                             <FormGroup style={{width: "95vw"}}>
                                 <Label for="description" style={{color:"black"}}>Short Description</Label>
-                                <Input type="text" name="description" id="description" placeholder="shortly name yor fix"/>
+                                <Input type="text" value={this.state.description} onChange={this.handleInputChange} name="description" id="description" placeholder="shortly name yor fix"/>
                             </FormGroup>
                             <FormGroup row style={{marginTop:"-3vh"}}>
                                 <Label style={{color:"black"}} for="addData" sm={2}>Aditional Data</Label>
                                 <Col sm={10}>
-                                <Input type="textarea" name="addData" id="addData" />
+                                <Input type="textarea" value={this.state.addData} onChange={this.handleInputChange} name="addData" id="addData" />
                                 </Col>
                             </FormGroup>
-
+                            <FormGroup style={{marginTop:"-2vh"}}>
+                                <Label for="plazo" style={{color:"black"}}>Term</Label>
+                                <Input type="date" name="plazo" id="plazo" placeholder="choose a convenient term"/>
+                            </FormGroup>
+                    
                             <hr></hr>    
+
                             {/* --------------- ADDRESS FORM  -------------*/}
                             
                             <div className="addressForm">
                             <FormGroup style={{width: "95vw", marginTop: "-2vh"}}>
                                 <Label for="city" style={{color:"black"}}>City</Label>
-                                <Input type="text" name="city" id="city"/>
+                                <Input type="text" value={this.state.city} onChange={this.handleInputChange} name="city" id="city"/>
                             </FormGroup>
                             <FormGroup style={{width: "95vw", marginTop: "-2vh"}}>
-                                <Label for="address" style={{color:"black"}}>Street</Label>
-                                <Input type="text" name="address" id="address"/>
+                                <Label for="street" style={{color:"black"}}>Street</Label>
+                                <Input type="text" value={this.state.street} onChange={this.handleInputChange} name="street" id="street"/>
                             </FormGroup>
                             <Row Form>
                                 <Col xs="6">
                                     <FormGroup style={{marginTop:"-2vh"}}>
-                                        <Label for="address" style={{color:"black"}}>Number</Label>
-                                        <Input type="text" name="address" id="address"/>
+                                        <Label for="number" style={{color:"black"}}>Number</Label>
+                                        <Input type="text" value={this.state.number} onChange={this.handleInputChange} name="number" id="number"/>
                                     </FormGroup>        
                                 </Col>
 
                                 <Col xs="6">
                                     <FormGroup style={{marginTop:"-2vh"}}>
-                                        <Label for="address" style={{color:"black"}}>Flat</Label>
-                                        <Input type="text" name="address" id="address"/>
+                                        <Label for="flat" style={{color:"black"}}>Flat</Label>
+                                        <Input type="text" value={this.state.flat} onChange={this.handleInputChange} name="flat" id="flat"/>
                                     </FormGroup>        
                                 </Col>
                             </Row>
@@ -64,8 +100,19 @@ class Quotes extends Component {
                             
                             <hr style={{marginTop: "-1vh"}}></hr>    
                             { /* --------------- CONTACT FORM  -------------*/}
+                            <FormGroup style={{marginTop: "-2vh"}}>
+                                <Label style={{color:"black"}} for="email">Email</Label>
+                                <Input type="email" value={this.state.email} onChange={this.handleInputChange} name="email" id="email"/>
+                            </FormGroup>
 
+                            <FormGroup style={{marginTop: "-2vh"}}>
+                                <Label style={{color:"black"}} for="telefono">Teléfono</Label>
+                                <Input type="tel" value={this.state.telefono} onChange={this.handleInputChange} name="telefono" id="telefono"/>
+                            </FormGroup>
                             
+                            <div style={{alignContent: "center"}}>
+                                <Button style={{marginLeft: "36vw", marginBottom: "2vh"}}>Quoting</Button>
+                            </div>                            
 
                         </Form>
                     </div>
@@ -76,3 +123,23 @@ class Quotes extends Component {
 }
 
 export default Quotes;
+
+
+
+
+/* 
+{hash.hashtag ? (
+    hash.hashtag.map((elem, i) => (
+        <p style={{marginRight:'10px', marginTop:'-4vh'}}>
+        <small> {elem}</small>
+        </p>
+    ) // TERCER MAP
+    )
+    ) : (
+    <div> 
+
+    </div>
+    )}
+
+
+*/

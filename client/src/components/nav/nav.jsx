@@ -30,9 +30,9 @@ class Nav2 extends Component {
     render(){
         return(
          
-      <Navbar color="dark" light expand="md">
+      <Navbar color="danger" light expand="md" fixed="true">
       
-      <UncontrolledDropdown style={{color: "#ed4747"}}>   
+      <UncontrolledDropdown>   
         <DropdownToggle nav caret>
           <span style={{fontSize: "1.2em", color: "white"}}>Options</span>
         </DropdownToggle>
@@ -40,7 +40,7 @@ class Nav2 extends Component {
           <DropdownMenu>
             <DropdownItem>
               <Link to="/sign-in">
-                Sign-In
+                My quotes
               </Link>
             </DropdownItem>
             <DropdownItem>
@@ -50,17 +50,17 @@ class Nav2 extends Component {
         </UncontrolledDropdown>
 
         <NavbarToggler onClick={this.toggle} />
-        <Collapse isOpen={this.state.setIsOpen} navbar>
+        <Collapse  isOpen={this.state.setIsOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem style={{color: "white"}}>
-            {/* <Link to="/c-account"> */}
-                Create Account
-              {/* </Link> */}
+            <Link to="/sign-up">
+              <span style={{color:"white", fontSize:"0.9em"}}>Create Account</span>
+            </Link>
             </NavItem>            
             <NavItem style={{color: "white"}}>
-            {/* <Link to="/login"> */}
-                Login
-            {/* </Link> */}
+            <Link to="/sign-in">
+                <span style={{color:"white", fontSize:"0.9em"}}>Login</span>
+            </Link>
             </NavItem>            
           </Nav>
         </Collapse>

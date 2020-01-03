@@ -1,6 +1,6 @@
 .componentContent{
     background-color: #faf5f5;
-    min-height: 78vh;
+    min-height: 79vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,4 +9,11 @@
     color: white;
     padding-top: 2vh;
     padding-bottom: 2vh;
+    min-width: 100vw;
   }
+
+  .card-header{
+    background-color: #ffb0b0;
+  }
+
+  

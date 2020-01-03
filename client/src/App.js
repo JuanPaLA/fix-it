@@ -32,7 +32,7 @@ class App extends Component {
             <div className="col-6 " align="center">
             <img src={Worker} className="worker" alt="technician"/>
               <button type="button" className="btn btn-dark">
-                <Link to="/workers">
+                <Link to="/jobs">
                   <span style={{color:"white"}}>Need a Job!</span>
                 </Link>
               </button>

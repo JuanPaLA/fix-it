@@ -40,11 +40,16 @@ router.get('/quotes/:id', (req, res) => {
 
 //@GET QUOTE BY USER_ID
 router.get('/quotes/user/:userId', (req, res) => {
-    console.log(req.body)
     quoteModel.findOne({ userId: req.params.userId })
     .then(quote => res.json(quote))
-    .catch(err => console.log("juan perez"))
+    .catch(err => console.log("error getin quotes by userId"))
 })
 
+//@GET QUOTE BY ESPECIALIDAD_ID
+router.get('/quotes/especiality/:especialidadId', (req, res) => {
+    quoteModel.find({ especialidadId: req.params.especialidadId})
+    .then(quote => res.json(quote))
+    .catch(err => console.log("error getin quotes by specialityId"))
+})
 
 module.exports = router;

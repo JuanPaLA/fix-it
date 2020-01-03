@@ -12,6 +12,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 //------------REDUX ELEMENTS------------//
 import { Provider } from "react-redux";
 import store from './redux/store';
+import Jobs from './components/services/jobs';
 
 ReactDOM.render
 (
@@ -21,7 +22,8 @@ ReactDOM.render
         <Route exact path='/' component={App} />
         <Route exact path="/services" component={Services}/>        
         <Route path="/sign-in" component={SignIn}/>
-        <Route path="/quotes" component={Quotes}/>
+        <Route path="/quotes/:subespecialidad" component={Quotes}/>
+        <Route path="/jobs/" component={Jobs}/>
       </Switch>
     </Router>
     </Provider>

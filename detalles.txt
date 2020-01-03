@@ -1,0 +1,7 @@
+CLIENTE
+- 
+
+
+
+SERVIDOR
+- Verificar el required true de userId y especialidadId en el post

@@ -1,13 +1,15 @@
-FormGroup {
-    margin-bottom: 30vh;
-}
 
-.componentContent {
+.componentContentForm{
+    background-color: #faf5f5;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    font-size: 0.8em;
+    /* calc(10px + 2vmin); */
+    color: white;   
     padding-left: 3vw;
     padding-right: 3vw;
-}
-
-.addressForm > FormGroup {
-    margin-top: -3vh;
-    margin-bottom: -3vh;
+    width: 100%;
 }
