@@ -6,7 +6,6 @@ import './jobs.css';
 import {  FormGroup, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getServices } from '../../redux/actions/serviceActions';
-import { getQuoteByField } from '../../redux/actions/quoteActions';
 import  PropTypes from 'prop-types';
 import SubQuotes from './subquotes';
 
@@ -44,7 +43,7 @@ class Jobs extends Component {
                     </Input>
                     {this.props.service.map((e,z) => {
                             if (e.especialidad === this.state.value) return <div>
-                            <SubQuotes key={{z}} id={e._id} esp={e.especialidad}/> 
+                            <SubQuotes key={{z}} id={e._id}/> 
                             </div>
                         })
                     }

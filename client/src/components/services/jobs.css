@@ -3,6 +3,7 @@
     max-width: 50vw;
     font-size: 0.9em;
     display: block;
+    /* position: fixed; */
 }
 /* Esto es para el label */
 #label{

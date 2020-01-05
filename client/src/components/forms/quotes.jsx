@@ -123,23 +123,3 @@ class Quotes extends Component {
 }
 
 export default Quotes;
-
-
-
-
-/* 
-{hash.hashtag ? (
-    hash.hashtag.map((elem, i) => (
-        <p style={{marginRight:'10px', marginTop:'-4vh'}}>
-        <small> {elem}</small>
-        </p>
-    ) // TERCER MAP
-    )
-    ) : (
-    <div> 
-
-    </div>
-    )}
-
-
-*/

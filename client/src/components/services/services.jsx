@@ -16,21 +16,7 @@ class Services extends Component {
         this.state = {
             specialties : []
         };
-        // this.mapping = this.mapping.bind(this);
     }
-
-    //  mapping(index){
-    //     var array = Array.from(this.props.service[index].subespecialidades);
-    //     const listItems = array.map((aux) => 
-    //         <li>{aux}</li>
-    //     );
-    //     console.log(listItems);
-    //     return(
-    //         <ul>
-    //             {listItems}
-    //         </ul>
-    //     )
-    //    }
 
     async componentDidMount(){
         await axios.get('http://localhost:5000/api/services/all')
@@ -40,8 +26,6 @@ class Services extends Component {
         })
         
        await this.props.getServices(); 
-
-    //    this.mapping(0);
     }
 
 

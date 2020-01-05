@@ -1,0 +1,25 @@
+.container{
+    min-width: 95vw;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-top: 2vh;
+    margin-bottom: 1vh;
+}
+
+.th{
+    font-family: sans-serif, Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: black;
+}
+
+.tb{
+    font-family: sans-serif;
+    color: black;
+}
+
+.cont{
+    margin-bottom: 1.4vh;
+}
+
+.bt{
+    display: flex;
+    justify-content: center;
+}
