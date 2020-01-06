@@ -1,15 +1,15 @@
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import React, { Component } from 'react';
-import Nav2 from './../nav/nav';
-import Footer from './../footer/footer';
-import './jobs.css';
+import Nav2 from '../nav/nav';
+import Footer from '../footer/footer';
+import './budgets.css';
 import {  FormGroup, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getServices } from '../../redux/actions/serviceActions';
 import  PropTypes from 'prop-types';
 import SubQuotes from './subquotes';
 
-class Jobs extends Component {
+class Budgets extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -55,7 +55,7 @@ class Jobs extends Component {
     }
 }
 
-Jobs.propTypes = {
+Budgets.propTypes = {
     getServices: PropTypes.func.isRequired,
     service: PropTypes.array.isRequired, //represents the state
 }
@@ -65,4 +65,4 @@ const mapStateToProps = (state) => ({
     service: state.service.services,
 })
 
-export default connect(mapStateToProps, {getServices})(Jobs);
+export default connect(mapStateToProps, {getServices})(Budgets);

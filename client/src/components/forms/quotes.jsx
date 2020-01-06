@@ -2,8 +2,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, {Component} from 'react';
 import Nav2 from './../nav/nav';
 import Footer from './../footer/footer';
-import { Button, Form, FormGroup, Label, Input, FormText, Col, Row } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Col, Row } from 'reactstrap';
 import './form.css';
+import { connect } from 'react-redux';
+import { postQuote } from '../../redux/actions/quoteActions';
+import  PropTypes from 'prop-types';
 
 class Quotes extends Component {
     constructor(props){
@@ -40,9 +43,9 @@ class Quotes extends Component {
       }
 
       handleSubmit(event){
-       alert(this.state.description + this.state.telefono + this.state.addData + this.state.email + this.state.number);
-       console.log(this.state.description + this.state.telefono + this.state.addData + this.state.email + this.state.number);
-       event.preventDefault();
+        var descripcion = this.state.description;
+       this.props.postQuote(descripcion)  
+       // después blanquear form
       }
 
     render(){
@@ -122,4 +125,13 @@ class Quotes extends Component {
     }
 }
 
-export default Quotes;
+Quotes.PropType = {
+    postQuote: PropTypes.func.isRequired,
+    quote: PropTypes.array.isRequired
+}
+
+const mapStateToProps = state => ({
+    quote: state.quote.quotes
+})
+
+export default connect(mapStateToProps, {postQuote})(Quotes)

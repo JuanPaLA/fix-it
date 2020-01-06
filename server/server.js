@@ -18,10 +18,13 @@ mongoose
 
 const services = require('./routes/api/services');
 const quotes = require('./routes/api/quotes');
+const budgets = require('./routes/api/budgets');
+const jobs = require('./routes/api/jobs')
 
 app.use('/api', quotes);
 app.use('/api', services);
-
+app.use('/api', budgets);
+app.use('/api', jobs);
 
 
 const port = process.env.PORT || 5000;

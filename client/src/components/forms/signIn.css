@@ -1,0 +1,17 @@
+.componentContent{
+    min-height: 78vh;
+}
+
+h4{
+    background-color: inherit !important;
+    text-align: center;
+    color:black;
+}
+
+Label {
+    color: black !important;
+}
+
+Button {
+    margin-top: 3vh;
+}

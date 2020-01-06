@@ -1,9 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';  
-import React, { Component, useState  } from 'react';
+import React, { Component  } from 'react';
 import { connect } from 'react-redux';
 import { getQuoteByField } from '../../redux/actions/quoteActions';
 import  PropTypes from 'prop-types';
-import { Toast, ToastBody, ToastHeader, UncontrolledCollapse, Button, Col, Row, Modal } from 'reactstrap';
+import { Toast, ToastBody, ToastHeader, Col, Row } from 'reactstrap';
 import './subquotes.css';
 import Moment from 'react-moment';
 import ModalForm from './../forms/modal';
@@ -43,7 +43,7 @@ class SubQuotes extends Component {
                             </Row>                            
                             <br/>
                             
-                            <ModalForm id={q._id} desc={q.descripcion} esp={q.data} user={q.userId}/>
+                            <ModalForm quoteId={q._id} desc={q.descripcion} esp={q.data} user={q.userId}/>
 
                         </ToastBody>
                     </Toast>

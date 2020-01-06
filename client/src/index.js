@@ -12,7 +12,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 //------------REDUX ELEMENTS------------//
 import { Provider } from "react-redux";
 import store from './redux/store';
-import Jobs from './components/services/jobs';
+import Budgets from './components/services/budgets';
 
 ReactDOM.render
 (
@@ -23,7 +23,7 @@ ReactDOM.render
         <Route exact path="/services" component={Services}/>        
         <Route path="/sign-in" component={SignIn}/>
         <Route path="/quotes/:subespecialidad" component={Quotes}/>
-        <Route path="/jobs/" component={Jobs}/>
+        <Route path="/budgets" component={Budgets}/>
       </Switch>
     </Router>
     </Provider>

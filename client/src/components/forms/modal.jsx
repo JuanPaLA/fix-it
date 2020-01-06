@@ -1,7 +1,7 @@
 import React, { useState, Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input, Form, Row, Col, CustomInput } from 'reactstrap';
 import { connect } from 'react-redux';
-import { postJob } from '../../redux/actions/jobActions';
+import { postBudget } from '../../redux/actions/budgetActions';
 import  PropTypes from 'prop-types';
 
 class ModalForm extends Component {
@@ -9,13 +9,13 @@ class ModalForm extends Component {
     super(props);
     this.state = {
       modal: false,
-      id: this.props.id,
+      quoteId: this.props.id,
       esp: this.props.esp,
       desc: this.props.desc,
       user: this.props.user,
-      price: null,
+      precio: '',
       mensaje: '',
-      plazo: null
+      plazo: ''
     }
     this.toggle = this.toggle.bind(this)
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -48,8 +48,9 @@ class ModalForm extends Component {
   }
 
   handleSubmit(event){
-    // this.props.postJob(this.state.price, this.state.plazo, this.state.quoteId) 
-    alert(this.state.price, this.state.plazo, this.state.quoteId)
+    console.log(this.state.precio, this.state.plazo.toString, this.props.quoteId, this.state.mensaje)
+    this.toggle();
+    this.props.postBudget(this.state.precio, this.props.quoteId, this.state.mensaje )
   }
 
 render(){
@@ -66,8 +67,8 @@ render(){
               <Row>
                 <Col>
                   <FormGroup>
-                    <Label for="price" style={{color:"black"}}>Estimated Budget</Label>
-                    <Input type="number" value={this.state.price} onChange={this.handleInputChange} name="price" id="price" style={{maxWidth: "45vw"}}/>
+                    <Label for="precio" style={{color:"black"}}>Estimated Budget</Label>
+                    <Input type="number" value={this.state.precio} onChange={this.handleInputChange} name="precio" id="precio" style={{maxWidth: "45vw"}}/>
                   </FormGroup>
                 </Col>     
                 <Col>
@@ -98,4 +99,13 @@ render(){
 }
 }
 
-export default ModalForm;
+ModalForm.PropType = {
+  postBudget: PropTypes.func.isRequired,
+  budget: PropTypes.array.isRequired
+}
+
+const mapStateToProps = state => ({
+  budget: state.budget.budgets
+})
+
+export default connect(mapStateToProps, {postBudget})(ModalForm);

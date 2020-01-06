@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const quoteModel = require('../../model/quotes')
+const quoteModel = require('../../model/quotes');
 
 //@GET QUOTES
 router.get('/quotes/all', (req, res) => {
@@ -14,7 +14,6 @@ router.get('/quotes/all', (req, res) => {
 
 //@POST QUOTE
 router.post('/quotes/add', (req, res) => {
-    console.log(req.body)
     const newQuote = new quoteModel({
         descripcion: req.body.descripcion,
         data: req.body.data,
