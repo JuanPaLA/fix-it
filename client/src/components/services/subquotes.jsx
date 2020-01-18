@@ -25,6 +25,7 @@ class SubQuotes extends Component {
     render(){
         return(
             <div className="container">
+                <hr style={{border: "thin black"}}></hr>
                 {this.props.quote.map((q, y) =>                     
                     <div className="cont" key={{y}}>
                     <Toast>
