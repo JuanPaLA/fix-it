@@ -7,7 +7,9 @@ import { connect } from 'react-redux';
 import { getServices } from '../../redux/actions/serviceActions';
 import  PropTypes from 'prop-types';
 import SubQuotes from './subquotes';
-import {Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Form, FormGroup, Label, Input } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import classnames from 'classnames';
 
 class Budgets extends Component {
     constructor(props){
@@ -16,9 +18,11 @@ class Budgets extends Component {
             specialties : [],
             value: '',
             selectedId: '',
-            count: 1 
+            count: 1,
+            activeTab: 1, 
         };
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.toggle = this.toggle.bind(this);
     }
 
     handleInputChange(evt) {
@@ -27,6 +31,14 @@ class Budgets extends Component {
 
     async componentDidMount(){
         await this.props.getServices();
+    }
+
+    toggle = tab => {
+        if(this.state.activeTab !== tab){
+          this.setState({
+              activeTab: tab
+          })  
+        } 
     }
 
     render(){
@@ -65,8 +77,86 @@ class Budgets extends Component {
                                 </div>
                             })
                         }
-                 </Form>                 
-                </div>
+                 </Form>      
+
+
+                 <hr style={{
+                            border: "thin inset !important black", 
+                            width: "88vw",
+                            marginTop: "2vh",
+                            borderBlockStartStyle: "inset !important"
+                            }}>
+                </hr>
+
+                {/* -----------TABS TEMPLATE-----------             */}
+                <div>
+
+                
+                <Nav tabs>
+                    <NavItem>
+                    <NavLink className="naver"
+                        style={{color:"black"}}
+                        className={classnames({ active: this.state.activeTab === '1' })}
+                        onClick={() => { this.toggle('1'); 
+                    }}
+                    >
+                        Tab1
+                    </NavLink>
+                    </NavItem>
+                    <NavItem>
+                    <NavLink className="naver"
+                        style={{color:"black"}}
+                        className={classnames({ active: this.state.activeTab === '2' })}
+                        onClick={() => { this.toggle('2'); 
+                    }}
+                    >
+                        Moar Tabs
+                    </NavLink>
+                    </NavItem>
+                </Nav>
+
+                <TabContent activeTab={this.state.activeTab}>
+                <TabPane tabId="1">
+                <Row>
+                    <Col sm="12">
+                    <h4>Tab 1 Contents</h4>
+                    </Col>
+                </Row>
+                </TabPane>
+                <TabPane tabId="2">
+                <Row>
+                    <Col sm="6">
+                    <Card body>
+                        <CardTitle
+                        style={{color:"black"}}
+                        >
+                            Special Title Treatment</CardTitle>
+                        <CardText
+                        style={{color:"black"}}
+                        >
+                            With supporting text below as a natural lead-in to additional content.</CardText>
+                        <Button>Go somewhere</Button>
+                    </Card>
+                    </Col>
+                    <Col sm="6">
+                    <Card body>
+                        <CardTitle
+                        style={{color:"black"}}
+                        >
+                            Special Title Treatment</CardTitle>
+                        <CardText
+                        style={{color:"black"}}
+                        >
+                            >With supporting text below as a natural lead-in to additional content.</CardText>
+                        <Button>Go somewhere</Button>
+                    </Card>
+                    </Col>
+                </Row>
+                </TabPane>
+            </TabContent>
+            </div>
+
+            </div>                   
                 <Footer/>
             </div>
         )

@@ -42,10 +42,8 @@ class SubQuotes extends Component {
                                     <strong>Term: </strong><Moment format="YYYY/MM/DD"><span><strong>Term:</strong></span>{q.plazo}</Moment>
                                 </Col>                        
                             </Row>                            
-                            <br/>
-                            
+                            <br/>                            
                             <ModalForm quoteId={q._id} desc={q.descripcion} esp={q.data} user={q.userId}/>
-
                         </ToastBody>
                     </Toast>
                 </div>

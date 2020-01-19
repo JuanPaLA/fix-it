@@ -6,6 +6,8 @@ import Footer from './../footer/footer';
 import './services.css';
 import { Link } from 'react-router-dom';
 import { UncontrolledCollapse } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { getServices } from '../../redux/actions/serviceActions';
 import  PropTypes from 'prop-types';
@@ -24,7 +26,6 @@ class Services extends Component {
             const specialties = res.data;
             this.setState({specialties}) 
         })
-        
        await this.props.getServices(); 
     }
 
@@ -43,14 +44,13 @@ class Services extends Component {
                         <div className="card-header text-center" id={`especiality${i}`}>
                         <span  style={{color: "black"}}><strong>{spec.especialidad}</strong></span>    
                         </div>                        
-                    
+
                         <UncontrolledCollapse toggler={`especiality${i}`}>
                         {spec.subespecialidades.map((sub, z) => 
                                 <li key={z} className="list-group-item" style={{color: "black"}}>
                                 <Link to={`/quotes/${sub}`}>
                                     {sub}
-                                </Link>
-                                
+                                </Link>                                
                                 </li>
                                 )}
                                 <li className="list-group-item" style={{color: "black"}}>
@@ -58,11 +58,8 @@ class Services extends Component {
                                     other
                                 </Link>
                                 </li>
-                        
-                         
-
-                        </UncontrolledCollapse>    
-                                                    
+                        </UncontrolledCollapse>        
+                                                                        
                         </div> 
                     )}
                   </div>

@@ -41,3 +41,9 @@ Label * {
     margin-top: 2vh;
     margin-left: 3vw;
 }
+
+/* no engrancha */
+.naver{
+    font: black !important;
+    color: black !important;
+  }

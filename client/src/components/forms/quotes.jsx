@@ -54,7 +54,8 @@ class Quotes extends Component {
                 <Nav2/>
                     <div className="componentContentForm">
 
-                            {/* --------------- TYPE FORM  ------------- */}
+                        {/* --------------- TYPE FORM  ------------- */}
+
                         <Form onSubmit={this.handleSubmit}>                    
                             <FormGroup style={{width: "95vw"}}>
                                 <Label for="description" style={{color:"black"}}>Short Description</Label>
@@ -102,7 +103,9 @@ class Quotes extends Component {
                             </div>
                             
                             <hr style={{marginTop: "-1vh"}}></hr>    
-                            { /* --------------- CONTACT FORM  -------------*/}
+                           
+                            { /* --------------- CONTACT FORM  -------------*/ }
+
                             <FormGroup style={{marginTop: "-2vh"}}>
                                 <Label style={{color:"black"}} for="email">Email</Label>
                                 <Input type="email" value={this.state.email} onChange={this.handleInputChange} name="email" id="email"/>
