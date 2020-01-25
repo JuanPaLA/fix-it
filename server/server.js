@@ -4,11 +4,13 @@ var cors = require('cors');
 const bodyParser = require('body-parser');
 var app = express();
 
-
 const db = require('./config/keys').mongoURI;
 
 /*-------MIDLEWARES-----------*/
 app.use(bodyParser());
+
+// Bodyparser Middleware
+app.use(express.json());
 app.use(cors());
 
 mongoose
@@ -19,13 +21,14 @@ mongoose
 const services = require('./routes/api/services');
 const quotes = require('./routes/api/quotes');
 const budgets = require('./routes/api/budgets');
-const jobs = require('./routes/api/jobs')
+const jobs = require('./routes/api/jobs');
+const users = require('./routes/api/users');
 
 app.use('/api', quotes);
 app.use('/api', services);
 app.use('/api', budgets);
 app.use('/api', jobs);
-
+app.use('/api', users);
 
 const port = process.env.PORT || 5000;
 

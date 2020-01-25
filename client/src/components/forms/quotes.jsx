@@ -44,7 +44,7 @@ class Quotes extends Component {
 
       handleSubmit(event){
         var descripcion = this.state.description;
-       this.props.postQuote(descripcion)  
+        this.props.postQuote(descripcion)  
        // después blanquear form
       }
 
@@ -113,8 +113,8 @@ class Quotes extends Component {
                                 <Input type="tel" value={this.state.telefono} onChange={this.handleInputChange} name="telefono" id="telefono"/>
                             </FormGroup>
                             
-                            <div style={{alignContent: "center"}}>
-                                <Button style={{marginLeft: "36vw", marginBottom: "2vh"}}>Quoting</Button>
+                            <div style={{textAlign: "center", marginBottom: "2vh"}}>
+                                <Button style={{width: "80vw"}}>Quoting</Button>
                             </div>                            
 
                         </Form>

@@ -1,4 +1,4 @@
-import { GET_BUDGET_BY_QUOTE } from '../actions/types';
+import { GET_BUDGET_BY_QUOTE, GET_BUDGETS } from '../actions/types';
 
 const initialState = {
     budgets : [
@@ -9,6 +9,11 @@ const initialState = {
 export default function(state = initialState, action) {
     switch(action.type){
         case GET_BUDGET_BY_QUOTE:
+            return {
+                ...state,
+                budgets: action.payload
+            }
+        case GET_BUDGETS:
             return {
                 ...state,
                 budgets: action.payload

@@ -1,31 +1,31 @@
-/* Esto es para el selector */
-#especialidad{
-    max-width: 50vw;
-    font-size: 0.9em;
-    display: block;
-    /* position: fixed; */
-}
 /* Esto es para el label */
 #label{
-    background-color: #fa4b4b;
-    margin: 1vh 4vw 1vh;
-    padding: 2px 2px 2px 2px;
-    align-self: center !important;
-    margin-top: 1vh;
-    margin-bottom: 1vh;
+    margin: 1vh 0vw 1vh 3vw;
+}
+
+#label h5{
+    text-align: center !important;
+}
+
+/* Esto es para el selector */
+#especialidad{
+    margin-left: 3vw;
+    max-width: 50vw;
+    font-size: 1.1em;
+}
+
+#especialidad * {
+    font-size: 0.8em !important;
 }
 
 .encloser{
     max-width: 100vw;
 }
 
+/* Contenedor del componente */
 .cc{
     background-color: #faf5f5;
     min-height: 79vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: start;
     font-size: calc(10px + 2vmin);
     color: white;
     min-width: 97vw;

@@ -56,7 +56,9 @@ class ModalForm extends Component {
 render(){
   return (      
         <div>
-          <Button color="danger" onClick={this.toggle}>Budget!</Button>
+          <div style={{textAlign: "center"}}>
+            <Button color="danger" onClick={this.toggle} style={{width: "70vw"}}>Budget!</Button>
+          </div>          
           <Modal isOpen={this.state.modal} toggle={this.toggle}>
             <ModalHeader toggle={this.toggle}>Apply your budget!</ModalHeader>
             <ModalBody>

@@ -3,9 +3,9 @@ import React, { Component  } from 'react';
 import { connect } from 'react-redux';
 import { getQuoteByField } from '../../redux/actions/quoteActions';
 import  PropTypes from 'prop-types';
-import { Toast, ToastBody, ToastHeader, Col, Row } from 'reactstrap';
+import { Toast, ToastBody, ToastHeader } from 'reactstrap';
+import {  Row, Col } from 'reactstrap';
 import './subquotes.css';
-import Moment from 'react-moment';
 import ModalForm from './../forms/modal';
 
 class SubQuotes extends Component {
@@ -19,15 +19,16 @@ class SubQuotes extends Component {
 
     async componentDidMount(){
         await this.props.getQuoteByField(this.props.id);
+        console.log(this.props.quote) //delete later
     }
-
     
     render(){
         return(
             <div className="container">
-                {this.props.quote.map((q, y) =>                     
+                {this.props.quote != 0?(
+                    this.props.quote.map((q, y) =>                     
                     <div className="cont" key={{y}}>
-                    <Toast>
+                    <Toast className="toast">
                         <ToastHeader icon="secondary" className="th">
                             <strong>JOB: </strong>{q.descripcion} 
                         </ToastHeader>
@@ -38,7 +39,7 @@ class SubQuotes extends Component {
                                 <span><strong>Location:</strong></span> {q.barrio}
                                 </Col>
                                 <Col xs="6">
-                                    <strong>Term: </strong><Moment format="YYYY/MM/DD"><span><strong>Term:</strong></span>{q.plazo}</Moment>
+                                    <strong>Term: </strong>Format Time
                                 </Col>                        
                             </Row>                            
                             <br/>
@@ -48,7 +49,11 @@ class SubQuotes extends Component {
                         </ToastBody>
                     </Toast>
                 </div>
-                )}
+                )):(
+                    <div>
+                        <h6 style={{color:"black"}}>No quotes available for selected field</h6>                    
+                    </div>
+                )}                 
             </div>
         )
     }

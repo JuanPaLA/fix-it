@@ -1,5 +1,6 @@
 .componentContent{
-    background-color: #faf5f5;
+    background-color: #f9f5f4;
+    background-image: url('https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjthcbntp3nAhW2JrkGHf7yAW8QjRx6BAgBEAQ&url=https%3A%2F%2Fwww.freepik.es%2Ffotos-vectores-gratis%2Ffontanero&psig=AOvVaw33zQ7o2iRnBZlOrAqnGRyy&ust=1579996119130445')!important;
     min-height: 79vh;
     display: flex;
     flex-direction: column;
@@ -12,8 +13,37 @@
     min-width: 100vw;
   }
 
-  .card-header{
-    background-color: #ffb0b0;
-  }
+div.card{
+  border-width: 0rem;
+  border-collapse: collapse;
+  border-top: 0rem;
+  border-bottom: 0rem;
+  border-right: 0rem !important;
+}
 
-  
+.card-header{
+  text-align: left;
+  font-weight:bold;
+}
+
+.card-header{
+  background-color: #f9f5f4;
+  text-align: left;
+}
+
+li.list-group-item{
+  background-color: #D7D7D7;
+  height: 7vh;
+}
+
+li.list-group-item a{
+  color: black;
+}
+
+.App-logo {
+  margin-top: 1vh;
+  margin-bottom: 2vh;
+  border-radius: 10%;
+  height: 12vh;
+  box-shadow: 3px 3px black;
+}

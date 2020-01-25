@@ -28,7 +28,6 @@ class Services extends Component {
        await this.props.getServices(); 
     }
 
-
     render() {
         console.log(this.props.service)
         return (
@@ -36,21 +35,22 @@ class Services extends Component {
                 <Nav2/>
                 <div className="componentContent">
                 
-                <h4 style={{color: "black"}}>Select what you need</h4>
+                {/* <img src={Logo} className="App-logo" alt="logo" /> */}
+
+                <h4 style={{color: "black", marginBottom: "2vh"}}>Select what you need</h4>
                     
                     {this.state.specialties.map((spec, i) => 
                         <div key={i} className="card" style={{width: "95vw", backgroundColor: "black"}}>
-                        <div className="card-header text-center" id={`especiality${i}`}>
-                        <span  style={{color: "black"}}><strong>{spec.especialidad}</strong></span>    
+                        <div className="card-header" id={`especiality${i}`}>
+                        <span  className="spaner" style={{color: "black"}}><li>{spec.especialidad}</li></span>    
                         </div>                        
                     
-                        <UncontrolledCollapse toggler={`especiality${i}`}>
+                        <UncontrolledCollapse color="secondary" toggler={`especiality${i}`}>
                         {spec.subespecialidades.map((sub, z) => 
                                 <li key={z} className="list-group-item" style={{color: "black"}}>
                                 <Link to={`/quotes/${sub}`}>
                                     {sub}
-                                </Link>
-                                
+                                </Link>                                
                                 </li>
                                 )}
                                 <li className="list-group-item" style={{color: "black"}}>
@@ -65,6 +65,31 @@ class Services extends Component {
                                                     
                         </div> 
                     )}
+
+                    {this.state.specialties.map((sp, y) => {
+                        {/* <div  id="carouselExampleCaptions" className="carousel slide" data-ride="carousel">
+                            <ol className="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                            </ol>
+                            <div className="carousel-item">                                
+                                <img src="..." className="d-block w-100" alt="..."/>
+                                <div className="carousel-caption d-none d-md-block">
+                                    <h5></h5>
+                                    <p></p>
+                                </div>                                
+                            </div>
+                            <a className="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span className="sr-only">Previous</span>
+                            </a>
+                            <a className="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                                <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span className="sr-only">Next</span>
+                            </a>
+                        </div> */}
+                    })}
                   </div>
                 <Footer/>
             </div>

@@ -1,8 +1,12 @@
 .container{
-    min-width: 95vw;
+    width: 100vw;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     margin-top: 2vh;
     margin-bottom: 1vh;
+}
+
+.cont{
+    width: 100vw;
 }
 
 .th{
@@ -13,10 +17,6 @@
 .tb{
     font-family: sans-serif;
     color: black;
-}
-
-.cont{
-    margin-bottom: 1.4vh;
 }
 
 .bt{

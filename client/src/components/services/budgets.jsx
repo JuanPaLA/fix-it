@@ -16,7 +16,8 @@ class Budgets extends Component {
             specialties : [],
             value: '',
             selectedId: '',
-            count: 1 
+            count: 1, 
+            bool: false 
         };
         this.handleInputChange = this.handleInputChange.bind(this);
     }
@@ -35,7 +36,9 @@ class Budgets extends Component {
                 <Nav2/>
                 <div className="cc">
                 <FormGroup>
-                    <Label id="label" for="especialidad">Choose a type of job!</Label>
+                    <Label id="label" for="especialidad">
+                        <h5>Choose a type of job!</h5>
+                    </Label>
                     <Input type="select" value={this.state.value} onChange={this.handleInputChange} name="especialidad" id="especialidad">
                     {this.props.service.map((spec, i) =>                     
                         <option key={i} className="opt">{spec.especialidad}</option>                    
@@ -44,7 +47,7 @@ class Budgets extends Component {
                     {this.props.service.map((e,z) => {
                             if (e.especialidad === this.state.value) return <div>
                             <SubQuotes key={{z}} id={e._id}/> 
-                            </div>
+                            </div>                         
                         })
                     }
                 </FormGroup>

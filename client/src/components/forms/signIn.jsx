@@ -1,9 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import React, {Component} from 'react';
-import Nav2 from './../nav/nav';
-import Footer from './../footer/footer';
 import { Button, Form, FormGroup, Label, Input, FormText, Col, Row } from 'reactstrap';
 import './signIn.css';
+import {Link} from 'react-router-dom';
 import axios from "axios";
 
 class SignIn extends Component {
@@ -36,47 +35,51 @@ class SignIn extends Component {
         }
 
     render(){
-        return(
-            <div>
-                <Nav2/>
-                    <div className="componentContent">                    
-                    {/* -----------ENCABEZADO--------------------- */}
-                    <div>
-                        <h4>Login </h4>
-                        {/* -------LOGIN FORM--------- */}
-                        <div className='container-fluid border my-1 mr-2'>           
-                         
-                        <Form onSubmit={this.handleSubmit}>
-                         
-                            <FormGroup>
-                                <Label for="email">Email</Label>
-                                <Input type="email" name="email"  value={this.state.email} onChange={this.handleInputChange}/>
-                            </FormGroup>
-                         
-                            <FormGroup>
-                                <Label for="examplePassword">Password</Label>
-                                <Input type="password" name="password" id="examplePassword" value={this.state.password}
-                                onChange={this.handleInputChange} />
-                            </FormGroup>
+        return(            
+                <div className="componentContent">                    
+                {/* -----------ENCABEZADO--------------------- */}
+                <div>
+                    <h4>Login </h4>
+                    {/* -------LOGIN FORM--------- */}
+                    <div className='container-fluid border my-1 mr-2 py-1 pr2 px-2'>           
+                        
+                    <Form onSubmit={this.handleSubmit}>
+                        
+                        <FormGroup>
+                            <Label for="email">Email</Label>
+                            <Input type="email" name="email"  value={this.state.email} onChange={this.handleInputChange}/>
+                        </FormGroup>
 
+                        <FormGroup>
+                            <Label for="examplePassword">Password</Label>
+                            <Input type="password" name="password" id="examplePassword" value={this.state.password}
+                            onChange={this.handleInputChange} />
+                        </FormGroup>
 
-                            <FormGroup check>
-                                <Label check>
-                                <Input type="checkbox" />{' '}
-                                Remember me.
-                                </Label>
-                            </FormGroup>
+                        <FormGroup check>
+                            <Label check>
+                            <Input type="checkbox" />{' '}
+                            Remember me.
+                            </Label>
+                        </FormGroup>
+                        
+                        <div className="bh">
+                            <Row>
+                                <Col>
+                                    <div className="buttonHoldera">
+                                        <Button>Sign In</Button>
 
-                            <Button color="primary">Login</Button>
-                            
-                            </Form>
-
+                                        {/* <div style={{color: "black", marginTop: "1vh"}}>
+                                            <a>Don't have an account? Create one <u >here.</u></a>
+                                        </div> */}
+                                    </div>        
+                                </Col>
+                            </Row>
                         </div>
-                    </div>
-                
+                    </Form>
                 </div>
-                <Footer/>
-                </div>
+            </div>
+        </div>
     
         );
     };

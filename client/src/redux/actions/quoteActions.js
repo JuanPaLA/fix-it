@@ -1,4 +1,4 @@
-import {GET_QUOTE_BY_FIELD, POST_QUOTE} from './../actions/types';
+import {GET_QUOTE_BY_FIELD, POST_QUOTE, GET_QUOTES} from './../actions/types';
 
 export const getQuoteByField = id => async dispatch => {
     var datos = await fetch(`http://localhost:5000/api/quotes/especiality/${id}`)
@@ -10,6 +10,17 @@ export const getQuoteByField = id => async dispatch => {
         payload: datos
     });
 };
+
+export const getQuotes = () => async dispatch => {
+    var datos = await fetch('http://localhost:5000/api/quotes/all')
+    .then(datos => datos.json())
+    .catch(err => console.log(err));
+
+    dispatch({
+        type: GET_QUOTES,
+        payload: datos
+    })
+}
 
 export const postQuote = (descripcion, data, plazo, direccion, barrio, telefono, email, especialidadId, userId ) => async dispatch => {
     var init = {

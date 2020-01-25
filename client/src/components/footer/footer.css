@@ -4,7 +4,6 @@
     margin-bottom: 0vh;
     display: flex;
     justify-content: center;
-  
     position: fixed;
     left: 0;
     bottom: -10;
@@ -29,13 +28,13 @@
     background-color: crimson;
     margin-bottom: -1vh;
     margin-top: 0.5vh;
-
+    
   }
 
   .p-2 footer {
-    max-width: 98vw;
-    /* background-color: crimson; */
+    max-width: 101vw;
   }
- 
 
+  
+  
 

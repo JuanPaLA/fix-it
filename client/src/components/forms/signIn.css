@@ -1,5 +1,9 @@
 .componentContent{
     min-height: 78vh;
+    width: 88vw;
+}
+div.container-fluid.border.my-1.mr-2{
+width: 90vw;
 }
 
 h4{
@@ -12,6 +16,15 @@ Label {
     color: black !important;
 }
 
-Button {
-    margin-top: 3vh;
+.buttonHoldera{
+    text-align: center;
+    margin: 2vh 0vw 1.5vh;
 }
+
+.buttonHoldera Button{
+    width: 80vw;
+}
+/* .buttonHolderb{
+    text-align: right;
+    margin: 3vh 3vw 2vh;
+} */

@@ -1,7 +1,6 @@
 CLIENTE
-- 
-
-
+- Render condicional de subquotes en caso de no haber nada
+- Mejorar aspescto de servicios  
 
 SERVIDOR
 - Verificar el required true de userId y especialidadId en el post

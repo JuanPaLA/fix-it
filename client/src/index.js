@@ -8,6 +8,7 @@ import App from './App';
 import Services from './components/services/services';
 import SignIn from './components/forms/signIn';
 import Quotes from './components/forms/quotes';
+import Login from './components/forms/login';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 //------------REDUX ELEMENTS------------//
 import { Provider } from "react-redux";
@@ -22,6 +23,7 @@ ReactDOM.render
         <Route exact path='/' component={App} />
         <Route exact path="/services" component={Services}/>        
         <Route path="/sign-in" component={SignIn}/>
+        <Route path="/login" component={Login}/>
         <Route path="/quotes/:subespecialidad" component={Quotes}/>
         <Route path="/budgets" component={Budgets}/>
       </Switch>
