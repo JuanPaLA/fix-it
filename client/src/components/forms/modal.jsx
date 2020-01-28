@@ -3,6 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, I
 import { connect } from 'react-redux';
 import { postBudget } from '../../redux/actions/budgetActions';
 import  PropTypes from 'prop-types';
+import './modal.css';
 
 class ModalForm extends Component {
   constructor(props){
@@ -50,12 +51,12 @@ class ModalForm extends Component {
   handleSubmit(event){
     console.log(this.state.precio, this.state.plazo.toString, this.props.quoteId, this.state.mensaje)
     this.toggle();
-    this.props.postBudget(this.state.precio, this.props.quoteId, this.state.mensaje )
+    this.props.postBudget(this.state.precio, this.props.quoteId, this.state.mensaje)
   }
 
 render(){
   return (      
-        <div>
+        <div className="mod">
           <div style={{textAlign: "center"}}>
             <Button color="danger" onClick={this.toggle} style={{width: "70vw"}}>Budget!</Button>
           </div>          

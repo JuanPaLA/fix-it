@@ -1,4 +1,4 @@
-import {GET_SERVICES, ADD_SERVICE } from '../actions/types';
+import {GET_SERVICES } from '../actions/types';
 
 const initialState = {
     services : [

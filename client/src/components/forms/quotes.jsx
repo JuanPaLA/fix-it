@@ -20,17 +20,22 @@ class Quotes extends Component {
             flat: '',
             email: '',
             telefono: '',
-            plazo: ''
+            plazo: '',
+            number: '',
+            flat: '', 
+            email: '',
+            id: ''
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     async componentDidMount(){
-    
         this.setState({
-            description: this.props.match.params.subespecialidad
+            description: this.props.match.params.subespecialidad,
+            id: this.props.match.params.id
         })
+        console.log(this.props.match.params.id)
     }
 
     handleInputChange(evt) {
@@ -44,8 +49,31 @@ class Quotes extends Component {
 
       handleSubmit(event){
         var descripcion = this.state.description;
-        this.props.postQuote(descripcion)  
-       // después blanquear form
+        var data = this.state.addData;
+        // var direccion = this.state.street;
+        var direccion = {
+            city : this.state.city,
+            street : this.state.street,
+            number : this.state.number,
+            flat : this.state.flat
+        }
+
+        this.props.postQuote(descripcion, data, 
+            this.state.plazo, direccion, 
+            this.state.telefono, this.state.email, this.state.id)              
+            this.setState ({
+                addData: '',
+                city: '',
+                street: '',
+                number: '',
+                flat: '',
+                email: '',
+                telefono: '',
+                plazo: '',
+                number: '',
+                flat: '', 
+                email: ''
+            })
       }
 
     render(){

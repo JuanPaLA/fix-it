@@ -28,7 +28,7 @@ class SubQuotes extends Component {
                 {this.props.quote != 0?(
                     this.props.quote.map((q, y) =>                     
                     <div className="cont" key={{y}}>
-                    <Toast className="toast">
+                    <Toast>
                         <ToastHeader icon="secondary" className="th">
                             <strong>JOB: </strong>{q.descripcion} 
                         </ToastHeader>

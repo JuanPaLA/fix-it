@@ -22,11 +22,12 @@ router.post('/budgets/add', (req, res) => {
         workerId: req.body.workerId,
         userId: req.body.userId,
         precio: req.body.precio,
-        // plazo: req.body.plazo,
+        plazo: req.body.plazo,
         quoteId: req.body.quoteId,
         mensaje: req.body.mensaje
     })
-    newBudget.save().then(budget => res.json(budget))
+    newBudget.save()
+    .then(budget => res.json(budget))
     .catch(err => {
         res.status(500).send("Server error on post budgets")
     })

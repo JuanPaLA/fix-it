@@ -20,13 +20,14 @@
 
 .encloser{
     max-width: 100vw;
+    height: 100vh;
 }
 
 /* Contenedor del componente */
 .cc{
     background-color: #faf5f5;
-    min-height: 79vh;
+    min-height: 80vh;
     font-size: calc(10px + 2vmin);
-    color: white;
-    min-width: 97vw;
+    /* color: white; */
+    min-width: 100vw;
 }

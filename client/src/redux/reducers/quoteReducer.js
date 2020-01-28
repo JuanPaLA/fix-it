@@ -1,4 +1,4 @@
-import {GET_QUOTE_BY_FIELD, GET_QUOTES } from '../actions/types';
+import {GET_QUOTE_BY_FIELD, GET_QUOTES, POST_QUOTE } from '../actions/types';
 
 const initialState = {
     quotes : [
@@ -14,6 +14,11 @@ export default function(state = initialState, action){
                 quotes: action.payload
             }
         case GET_QUOTES:
+            return {
+                ...state,
+                quotes: action.payload
+            }
+        case POST_QUOTE:
             return {
                 ...state,
                 quotes: action.payload

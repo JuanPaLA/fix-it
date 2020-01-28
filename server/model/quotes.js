@@ -8,15 +8,24 @@ const quoteSchema = new mongoose.Schema({
     data: {
         type: String
     },
+    // city: {
+    //     type: String
+    // },
     plazo : {
-        type: String //debería ser DATE --> dd/mm/aaa
+        type: String
     },
     direccion : {
-        type: String 
+        type: Array 
     },
-    barrio : {
-        type: String 
-    },
+    // number: {
+    //     type: Number
+    // },
+    // flat: {
+    //     type: Number
+    // },
+    // barrio : {
+    //     type: String 
+    // },
     telefono : {
         type: String 
     },

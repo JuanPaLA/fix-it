@@ -24,7 +24,7 @@ ReactDOM.render
         <Route exact path="/services" component={Services}/>        
         <Route path="/sign-in" component={SignIn}/>
         <Route path="/login" component={Login}/>
-        <Route path="/quotes/:subespecialidad" component={Quotes}/>
+        <Route path="/quotes/:id" component={Quotes}/>
         <Route path="/budgets" component={Budgets}/>
       </Switch>
     </Router>

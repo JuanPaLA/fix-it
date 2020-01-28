@@ -22,19 +22,20 @@ export const getQuotes = () => async dispatch => {
     })
 }
 
-export const postQuote = (descripcion, data, plazo, direccion, barrio, telefono, email, especialidadId, userId ) => async dispatch => {
+export const postQuote = (descripcion, data, plazo, direccion, telefono, email, especialidadId ) => async dispatch => { // falta agregar userId
     var init = {
         method: 'POST',
-        body: JSON.stringify({descripcion, data, plazo, direccion, barrio, telefono, email, especialidadId, userId}),
+        body: JSON.stringify({descripcion, data, plazo, direccion, telefono, email, especialidadId}),// falta agregar userId, barrio, especialidadId
+        mode: 'cors',
         headers: {
+            'Content-Type': 'application/x-www-form-urlencoded', 
             'Content-Type': 'application/json'
         }
     };
     var url = `http://localhost:5000/api/quotes/add`;
 
-    let resp = await fetch(url, init).then(res => {
-        return res.json()
-      });
+    let resp = await fetch(url, init)
+        .then(res => res.json())
 
     dispatch({
         type: POST_QUOTE,

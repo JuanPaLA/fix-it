@@ -48,19 +48,11 @@ class Services extends Component {
                         <UncontrolledCollapse color="secondary" toggler={`especiality${i}`}>
                         {spec.subespecialidades.map((sub, z) => 
                                 <li key={z} className="list-group-item" style={{color: "black"}}>
-                                <Link to={`/quotes/${sub}`}>
+                                <Link to={`/quotes/${spec._id}`}>
                                     {sub}
                                 </Link>                                
-                                </li>
+                                </li>    
                                 )}
-                                <li className="list-group-item" style={{color: "black"}}>
-                                <Link to={`/quotes/`}>
-                                    other
-                                </Link>
-                                </li>
-                        
-                         
-
                         </UncontrolledCollapse>    
                                                     
                         </div> 

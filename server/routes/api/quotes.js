@@ -14,12 +14,12 @@ router.get('/quotes/all', (req, res) => {
 
 //@POST QUOTE
 router.post('/quotes/add', (req, res) => {
+    console.log(req.body)
     const newQuote = new quoteModel({
         descripcion: req.body.descripcion,
         data: req.body.data,
         plazo: req.body.plazo,
         direccion: req.body.direccion,
-        barrio: req.body.barrio,
         telefono: req.body.telefono,
         email: req.body.email,
         especialidadId: req.body.especialidadId,

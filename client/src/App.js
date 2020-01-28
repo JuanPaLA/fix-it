@@ -30,7 +30,7 @@ class App extends Component {
         <div className="container-fluid">
           <div className="row">
             <div className="col-6 " align="center">
-            <img src={Worker} className="worker" alt="technician"/>
+            <img src={Worker} className="worker" alt="technician"/><br></br>
               <button type="button" className="btn btn-dark">
                 <Link to="/budgets">
                   <span style={{color:"white"}}>Need a Job!</span>

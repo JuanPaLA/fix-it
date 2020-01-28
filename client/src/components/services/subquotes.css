@@ -2,11 +2,15 @@
     width: 100vw;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     margin-top: 2vh;
-    margin-bottom: 1vh;
 }
 
 .cont{
     width: 100vw;
+    padding-bottom: 1vh;
+}
+
+div.toast.fade.show{
+    text-align: center !important;
 }
 
 .th{
