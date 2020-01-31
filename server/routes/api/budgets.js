@@ -18,13 +18,13 @@ router.get('/budgets/all', (req, res) => {
 router.post('/budgets/add', (req, res) => {
     console.log(req.body)
     const newBudget = new budgetModel({
-        especialidadId: req.body.especialidadId,
+        // especialidadId: req.body.especialidadId,
+        // plazo: req.body.plazo,
+        precio: req.body.precio,
+        quoteId: req.body.quoteId,
+        mensaje: req.body.mensaje,
         workerId: req.body.workerId,
         userId: req.body.userId,
-        precio: req.body.precio,
-        plazo: req.body.plazo,
-        quoteId: req.body.quoteId,
-        mensaje: req.body.mensaje
     })
     newBudget.save()
     .then(budget => res.json(budget))

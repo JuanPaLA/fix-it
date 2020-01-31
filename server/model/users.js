@@ -4,11 +4,11 @@ const Schema = mongoose.Schema;
 //Create Schema
 const UserSchema = new Schema ({
     userName: {
-        type: String
+        type: String,
+        required: true        
     },
     email: {
         type: String,
-        unique: true,
         required: true        
     },
     password: {
@@ -16,8 +16,13 @@ const UserSchema = new Schema ({
         required: true     
     },
     rol : {
-        type: String
-    }
+        type: String,
+        // required: true  // falta implementar en el front      
+    },
+    date: {
+        type: Date,
+        default: Date.now
+      }
 });
 
 module.exports = User = mongoose.model('user', UserSchema)

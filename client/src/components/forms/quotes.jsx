@@ -7,6 +7,7 @@ import './form.css';
 import { connect } from 'react-redux';
 import { postQuote } from '../../redux/actions/quoteActions';
 import  PropTypes from 'prop-types';
+import jwt from 'jwt-decode' // import dependency
 
 class Quotes extends Component {
     constructor(props){
@@ -24,16 +25,23 @@ class Quotes extends Component {
             number: '',
             flat: '', 
             email: '',
-            id: ''
+            especialidadId: '',
+            userId: ''
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     async componentDidMount(){
+        //DECODE USER-ID
+        const token = localStorage.getItem('jwtToken');
+        const user = jwt(token)
+        const id = user.id;
+
         this.setState({
             description: this.props.match.params.subespecialidad,
-            id: this.props.match.params.id
+            especialidadId: this.props.match.params.id,
+            userId: id
         })
         console.log(this.props.match.params.id)
     }
@@ -50,7 +58,6 @@ class Quotes extends Component {
       handleSubmit(event){
         var descripcion = this.state.description;
         var data = this.state.addData;
-        // var direccion = this.state.street;
         var direccion = {
             city : this.state.city,
             street : this.state.street,
@@ -60,7 +67,7 @@ class Quotes extends Component {
 
         this.props.postQuote(descripcion, data, 
             this.state.plazo, direccion, 
-            this.state.telefono, this.state.email, this.state.id)              
+            this.state.telefono, this.state.email, this.state.especialidadId, this.state.userId)              
             this.setState ({
                 addData: '',
                 city: '',
@@ -74,6 +81,7 @@ class Quotes extends Component {
                 flat: '', 
                 email: ''
             })
+            this.props.history.push("/myquotes")
       }
 
     render(){

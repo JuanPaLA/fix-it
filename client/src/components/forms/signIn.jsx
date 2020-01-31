@@ -2,8 +2,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, {Component} from 'react';
 import { Button, Form, FormGroup, Label, Input, FormText, Col, Row } from 'reactstrap';
 import './signIn.css';
-import {Link} from 'react-router-dom';
-import axios from "axios";
+import {Link, withRouter} from 'react-router-dom';
+import  PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { loginUser } from "../../redux/actions/authActions";
+import classnames from "classnames";
+
 
 class SignIn extends Component {
     constructor(props){
@@ -17,6 +21,17 @@ class SignIn extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.auth.isAuthenticated) {
+          this.props.history.push("/services"); // push user to dashboard when they login
+        }
+    if (nextProps.errors) {
+          this.setState({
+            errors: nextProps.errors
+          });
+        }
+      }
+
     handleInputChange(evt) {
         const value =
     evt.target.type === "checkbox" ? evt.target.checked : evt.target.value;    
@@ -27,12 +42,20 @@ class SignIn extends Component {
       }
 
       handleSubmit(event){
-        if(this.state.email.length == 0 || this.state.password.length == 0){
+          event.preventDefault();
+        if(this.state.password.length <= 6){
           alert('complete required fields')    
-        }else{
-            console.log("en cosntrucción")
+            }else{
+                const newUser = {
+                    email: this.state.email,
+                    password: this.state.password,
+                };
+                this.props.loginUser(newUser); 
+                };
             }
-        }
+        
+
+        
 
     render(){
         return(            
@@ -67,16 +90,13 @@ class SignIn extends Component {
                             <Row>
                                 <Col>
                                     <div className="buttonHoldera">
-                                        <Button>Sign In</Button>
-
-                                        {/* <div style={{color: "black", marginTop: "1vh"}}>
-                                            <a>Don't have an account? Create one <u >here.</u></a>
-                                        </div> */}
+                                        <Button>Sign In</Button>                                        
                                     </div>        
                                 </Col>
                             </Row>
                         </div>
                     </Form>
+                    <p style={{color:"black"}}> Don't have an account? <Link to="/sign-up">Register</Link></p>
                 </div>
             </div>
         </div>
@@ -85,4 +105,15 @@ class SignIn extends Component {
     };
 }
 
-export default SignIn; 
+SignIn.propTypes = {
+    loginUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired
+  };
+  
+  const mapStateToProps = state => ({
+    auth: state.auth,
+    errors: state.errors
+  });
+  
+  export default connect(mapStateToProps, { loginUser })(SignIn);

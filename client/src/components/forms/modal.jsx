@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { postBudget } from '../../redux/actions/budgetActions';
 import  PropTypes from 'prop-types';
 import './modal.css';
+import jwt from 'jwt-decode' // import dependency
 
 class ModalForm extends Component {
   constructor(props){
@@ -24,7 +25,8 @@ class ModalForm extends Component {
   }
 
   async componentDidMount(){
-    
+    console.log(this.props)
+
   }
 
   toggle(){
@@ -49,9 +51,13 @@ class ModalForm extends Component {
   }
 
   handleSubmit(event){
-    console.log(this.state.precio, this.state.plazo.toString, this.props.quoteId, this.state.mensaje)
+    const token = localStorage.getItem('jwtToken');
+    const user = jwt(token)
+    const workerId = user.id;
     this.toggle();
-    this.props.postBudget(this.state.precio, this.props.quoteId, this.state.mensaje)
+    // alert(this.props.userId)
+    // alert(this.state.precio, this.props.quoteId, this.state.mensaje, this.props.userId, workerId);
+    this.props.postBudget(this.state.precio, this.props.quoteId, this.state.mensaje, this.props.userId, workerId)
   }
 
 render(){

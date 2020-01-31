@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
 const budgetSchema = new mongoose.Schema({
+    // especialidadId: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    // },
     // plazo: {
     //     type:  String //debería ser DATE --> dd/mm/aaa
     // },
@@ -12,9 +15,6 @@ const budgetSchema = new mongoose.Schema({
     },
     quoteId: {
         type: mongoose.Schema.Types.ObjectId
-    },
-    especialidadId: {
-        type: mongoose.Schema.Types.ObjectId,
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,

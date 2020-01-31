@@ -3,21 +3,23 @@ const router = express.Router()
 const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
-const Key = require('./../../config/keys').secret;
+const Key = require('./../../config/keys');
 
 const userModel = require('../../model/users');
 
 //@route POST api/users
-router.post('/users/create', [
+router.post('/users/register', [
+    /*---------VALIDACIÓN--------- */
     check('email').isEmail(),
-    check('password').isLength({ min:5 })
+    check('password').isLength({ min:6 }),
+    check('userName').isLength({ min:6 })
 ],  
     (req, res) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()){
         return res.status(422).json({ errors: errors.array() });
     }
-    
+    // Chequea si existe en la base de datos
     userModel.findOne({email: req.body.email})
     .then(user => {
         if(user){
@@ -26,6 +28,7 @@ router.post('/users/create', [
 
         var hash = bcrypt.hashSync(req.body.password, 8);
         const newUser = new userModel({
+
             userName: req.body.userName,
             email: req.body.email,
             rol: req.body.rol, 
@@ -37,6 +40,75 @@ router.post('/users/create', [
     return res.send("user succesfully registered")    
     })
 })
+
+/* -------------------- LOGIN ------------------------------------------*/
+
+// @route POST api/users/login
+// @desc Login user and return JWT token
+// @access Public
+router.post("/users/login", [
+    /*---------VALIDACIÓN--------- */
+    check('email').isEmail(),
+    check('password').isLength({ min:6 })
+],
+(req, res) => {
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        return res.status(422).json({ errors: errors.array() });
+  }
+const email = req.body.email;
+const password = req.body.password;
+// Find user by email
+userModel.findOne({ email }).then(user => {
+    // Check if user exists
+    if (!user) {
+      return res.status(404).json({ emailnotfound: "Email not found" });
+    }
+// Check password
+    bcrypt.compare(password, user.password).then(isMatch => {
+      if (isMatch) {
+        // User matched
+        // Create JWT Payload
+        const payload = {
+          id: user.id,
+          name: user.name,
+          rol: user.rol,
+          email: user.email
+        };
+// Sign token
+        jwt.sign(
+          payload,
+          Key.secret,
+          {
+            expiresIn: 18000 // 1 year in seconds
+          },
+          (err, token) => {
+            res.json({
+              success: true,
+              token: "Bearer " + token
+            });
+          }
+        );
+      } else {
+        return res
+          .status(400)
+          .json({ passwordincorrect: "Password incorrect" });
+      }
+    });
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
 
 //----------- FOLLOWING THE TRAVERSY MEDIA COURSE------------//
 

@@ -39,7 +39,7 @@ router.get('/quotes/:id', (req, res) => {
 
 //@GET QUOTE BY USER_ID
 router.get('/quotes/user/:userId', (req, res) => {
-    quoteModel.findOne({ userId: req.params.userId })
+    quoteModel.find({ userId: req.params.userId })
     .then(quote => res.json(quote))
     .catch(err => console.log("error getin quotes by userId"))
 })
@@ -50,5 +50,18 @@ router.get('/quotes/especiality/:especialidadId', (req, res) => {
     .then(quote => res.json(quote))
     .catch(err => console.log("error getin quotes by specialityId"))
 })
+
+// Delete Student
+router.delete('/quotes/delete/:id', (req, res, next) => {
+    quoteModel.findByIdAndRemove(req.params.id, (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        res.status(200).json({
+          msg: data
+        })
+      }
+    })
+  })
 
 module.exports = router;

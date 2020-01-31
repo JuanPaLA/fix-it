@@ -39,9 +39,9 @@ class Nav2 extends Component {
         
           <DropdownMenu>
             <DropdownItem>
-              <Link to="/sign-in">
+              <Link to="myquotes">
                 My quotes
-              </Link>
+              </Link>            
             </DropdownItem>
             <DropdownItem>
               Option 2
@@ -54,12 +54,12 @@ class Nav2 extends Component {
           <Nav className="ml-auto" navbar>
             <NavItem style={{color: "white"}}>
             <Link to="/sign-up">
-              <span style={{color:"white", fontSize:"0.9em"}}>Create Account</span>
+              <span style={{color:"white", fontSize:"0.9em"}}>Sign Up</span>
             </Link>
             </NavItem>            
             <NavItem style={{color: "white"}}>
             <Link to="/sign-in">
-                <span style={{color:"white", fontSize:"0.9em"}}>Login</span>
+                <span style={{color:"white", fontSize:"0.9em"}}>Sign In</span>
             </Link>
             </NavItem>            
           </Nav>

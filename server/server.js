@@ -2,6 +2,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var cors = require('cors');
 const bodyParser = require('body-parser');
+const passport = require("passport");
 var app = express();
 
 const db = require('./config/keys').mongoURI;
@@ -13,10 +14,27 @@ app.use(bodyParser());
 app.use(express.json());
 app.use(cors());
 
+// This is the way in wich is implemented by tutorial
+// Bodyparser middleware
+app.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
+);
+app.use(bodyParser.json());
+
+
+// Passport middleware
+app.use(passport.initialize());
+// Passport config
+require("./routes/validation/passport")(passport);
+
 mongoose
-  .connect(db)
+  .connect(db, { useNewUrlParser: true })
   .then(() => console.log('MongoDB connected mother fucker'))
   .catch(err => console.log(err));
+
+mongoose.set('useUnifiedTopology', true);
 
 const services = require('./routes/api/services');
 const quotes = require('./routes/api/quotes');

@@ -2,9 +2,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component, useState } from 'react';
 import { Button, Form, FormGroup, Label, Input, FormText, Col, Row } from 'reactstrap';
 import './signUp.css';
-import { Redirect } from 'react-router';
-import {Link} from 'react-router-dom';
-import axios from "axios";
+import {Link, withRouter} from 'react-router-dom';
+import  PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { registerUser } from "../../redux/actions/authActions";
+import classnames from "classnames";
 
 class SignUp extends Component {
     constructor(props){
@@ -15,11 +17,26 @@ class SignUp extends Component {
             password: '',
             pic: '',
             rol: '',
-            redirect: 'https://dev.to/projectescape/programmatic-navigation-in-react-3p1l'
+            errors: {}
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+    componentDidMount() {
+        // If logged in and user navigates to Register page, should redirect them to dashboard
+        if (this.props.auth.isAuthenticated) {
+          this.props.history.push("/");
+        }
+      }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.errors) {
+          this.setState({
+            errors: nextProps.errors
+          });
+        }
+      }
 
     handleInputChange(evt) {
         const value =
@@ -31,11 +48,16 @@ class SignUp extends Component {
       }
 
       handleSubmit(event){
-        if(this.state.email.length == 0 || this.state.password.length == 0){
-        //   alert('complete required fields')    
-        return <Redirect to='http://localhost:3000/services' />
+        event.preventDefault();
+        if(this.state.userName.length <= 5 || this.state.password.length <= 6){
+            console.log('escribi ura')
         }else{
-            
+            const newUser = {
+                userName: this.state.userName,
+                email: this.state.email,
+                password: this.state.password,
+              };
+              this.props.registerUser(newUser, this.props.history); 
             }
         }
 
@@ -70,6 +92,8 @@ class SignUp extends Component {
                             <Button type="submit" id="bs">Submit</Button>
                         </div>                        
                     </Form>
+
+                    <p style={{color:"black"}}> Already have an account? <Link to="/sign-in">Register</Link></p>
                     </div>
                 </div>
             </div>
@@ -77,4 +101,15 @@ class SignUp extends Component {
     }
 }
 
-export default SignUp;
+SignUp.propTypes = {
+    registerUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired
+  };
+
+const mapStateToProps = state => ({
+    auth: state.auth,
+    errors: state.errors
+  });
+
+export default connect(mapStateToProps, { registerUser })(withRouter(SignUp));

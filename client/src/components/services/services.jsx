@@ -5,20 +5,49 @@ import Nav2 from './../nav/nav';
 import Footer from './../footer/footer';
 import './services.css';
 import { Link } from 'react-router-dom';
+import {  FormGroup, Label, Input } from 'reactstrap';
 import { UncontrolledCollapse } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getServices } from '../../redux/actions/serviceActions';
+import { logoutUser } from "../../redux/actions/authActions";
 import  PropTypes from 'prop-types';
+import jwt from 'jwt-decode' // import dependency
 
 class Services extends Component {
     constructor(props){
         super(props);
         this.state = {
-            specialties : []
+            specialties : [],
+            id: '',
+            email: ''
         };
+        this.onLogoutClick = this.onLogoutClick.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
+    handleInputChange(evt) {
+        this.setState({value: evt.target.value});   
+    }  
+
+    onLogoutClick = e => {
+        e.preventDefault();
+        this.props.logoutUser();
+      };
+
     async componentDidMount(){
+        const token = localStorage.getItem('jwtToken');
+        const user = jwt(token)
+        const id = user.id;
+        const email = user.email;
+
+        this.setState ({
+            id: id,
+            email: email
+        })
+
+        console.log(id);
+        console.log(email);
+
         await axios.get('http://localhost:5000/api/services/all')
         .then( res => {
             const specialties = res.data;
@@ -26,18 +55,18 @@ class Services extends Component {
         })
         
        await this.props.getServices(); 
+       console.log(this.props)
     }
 
     render() {
+        const { user } = this.props.auth;
         console.log(this.props.service)
         return (
             <div>
                 <Nav2/>
                 <div className="componentContent">
-                
-                {/* <img src={Logo} className="App-logo" alt="logo" /> */}
 
-                <h4 style={{color: "black", marginBottom: "2vh"}}>Select what you need</h4>
+                <Label style={{color: "black", marginBottom: "2vh"}}>What kind of service do you need?</Label>
                     
                     {this.state.specialties.map((spec, i) => 
                         <div key={i} className="card" style={{width: "95vw", backgroundColor: "black"}}>
@@ -57,31 +86,14 @@ class Services extends Component {
                                                     
                         </div> 
                     )}
-
-                    {this.state.specialties.map((sp, y) => {
-                        {/* <div  id="carouselExampleCaptions" className="carousel slide" data-ride="carousel">
-                            <ol className="carousel-indicators">
-                                <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                            </ol>
-                            <div className="carousel-item">                                
-                                <img src="..." className="d-block w-100" alt="..."/>
-                                <div className="carousel-caption d-none d-md-block">
-                                    <h5></h5>
-                                    <p></p>
-                                </div>                                
-                            </div>
-                            <a className="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-                                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span className="sr-only">Previous</span>
-                            </a>
-                            <a className="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-                                <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span className="sr-only">Next</span>
-                            </a>
-                        </div> */}
-                    })}
+                    {/* <Input type="select" value={this.state.value} onChange={this.handleInputChange} name="especialidad" id="especialidad">
+                    {this.props.service.map((spec, i) =>                                                 
+                        <option  className="spaner" style={{color: "black"}}>{spec.especialidad}</option>                                                    
+                    )}
+                    </Input>
+                    <Input type="select" value={this.state.value} onChange={this.handleInputChange} name="especialidad" id="especialidad">
+                    
+                    </Input> */}
                   </div>
                 <Footer/>
             </div>
@@ -91,12 +103,15 @@ class Services extends Component {
 
 Services.propTypes = {
     getServices: PropTypes.func.isRequired,
-    service: PropTypes.array.isRequired //represents the state
+    service: PropTypes.array.isRequired, //represents the state
+    logoutUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
     //called like in the rootReducer
-    service: state.service.services
+    service: state.service.services,
+    auth: state.auth
 }) 
 
 export default connect(mapStateToProps, {getServices})(Services);

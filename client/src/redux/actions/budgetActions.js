@@ -1,4 +1,4 @@
-import {GET_BUDGET_BY_QUOTE, POST_BUDGET, GET_QUOTES} from './types';
+import {GET_BUDGET_BY_QUOTE, POST_BUDGET} from './types';
 
 export const getJobsByQuote = (id) => async dispatch => {
     var datos = await fetch(`http://localhost:5000/api/budgets/quote/${id}`)
@@ -11,11 +11,11 @@ export const getJobsByQuote = (id) => async dispatch => {
     });
 };
 
-export const postBudget = (precio, quoteId, mensaje, plazo) => async dispatch => {
+export const postBudget = (precio, quoteId, mensaje, workerId, userId) => async dispatch => { // falta agregar plazo
     //cabeceras
     var myInit = {
     method: 'POST',
-    body: JSON.stringify({precio, mensaje, quoteId, plazo}), 
+    body: JSON.stringify({precio, mensaje, quoteId, workerId, userId}), 
     mode: 'cors',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded', 

@@ -1,7 +1,6 @@
 .componentContent{
     background-color: #f9f5f4;
-    background-image: url('https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjthcbntp3nAhW2JrkGHf7yAW8QjRx6BAgBEAQ&url=https%3A%2F%2Fwww.freepik.es%2Ffotos-vectores-gratis%2Ffontanero&psig=AOvVaw33zQ7o2iRnBZlOrAqnGRyy&ust=1579996119130445')!important;
-    min-height: 79vh;
+    min-height: 80vh !important;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -7,6 +7,7 @@ import { Toast, ToastBody, ToastHeader } from 'reactstrap';
 import {  Row, Col } from 'reactstrap';
 import './subquotes.css';
 import ModalForm from './../forms/modal';
+import jwt from 'jwt-decode' // import dependency
 
 class SubQuotes extends Component {
     constructor(props){
@@ -18,8 +19,10 @@ class SubQuotes extends Component {
     }
 
     async componentDidMount(){
+        const token = localStorage.getItem('jwtToken');
+        const user = jwt(token)
+        const userId = user.id;
         await this.props.getQuoteByField(this.props.id);
-        console.log(this.props.quote) //delete later
     }
     
     render(){
@@ -44,7 +47,7 @@ class SubQuotes extends Component {
                             </Row>                            
                             <br/>
                             
-                            <ModalForm quoteId={q._id} desc={q.descripcion} esp={q.data} user={q.userId}/>
+                            <ModalForm quoteId={q._id} desc={q.descripcion} esp={q.data} userId={q.userId}/>
 
                         </ToastBody>
                     </Toast>

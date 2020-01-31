@@ -8,24 +8,13 @@ const quoteSchema = new mongoose.Schema({
     data: {
         type: String
     },
-    // city: {
-    //     type: String
-    // },
     plazo : {
         type: String
     },
     direccion : {
-        type: Array 
+        type: Array,
+        required: true 
     },
-    // number: {
-    //     type: Number
-    // },
-    // flat: {
-    //     type: Number
-    // },
-    // barrio : {
-    //     type: String 
-    // },
     telefono : {
         type: String 
     },
@@ -34,11 +23,11 @@ const quoteSchema = new mongoose.Schema({
     },
     especialidadId: {
         type: mongoose.Schema.Types.ObjectId,
-        // required: true 
+        required: true 
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        // required: true
+        required: true
     }
 })
 
