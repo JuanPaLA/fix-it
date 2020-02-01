@@ -34,6 +34,7 @@ class Quotes extends Component {
 
     async componentDidMount(){
         //DECODE USER-ID
+        console.log(this.props);
         const token = localStorage.getItem('jwtToken');
         const user = jwt(token)
         const id = user.id;

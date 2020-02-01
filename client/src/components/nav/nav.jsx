@@ -44,7 +44,9 @@ class Nav2 extends Component {
               </Link>            
             </DropdownItem>
             <DropdownItem>
-              Option 2
+              <Link to="/mybudgets">
+                My Budgets
+              </Link>
             </DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>

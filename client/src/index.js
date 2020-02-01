@@ -53,7 +53,7 @@ ReactDOM.render
         <Switch>
               <PrivateRoute exact path="/services" component={Services} />
               <PrivateRoute exact path="/budgets" component={Budgets} />
-              <PrivateRoute exact path="/quotes/:id" component={Quotes} />
+              <PrivateRoute exact path="/quotes/:especialidadId/:id" component={Quotes} />
               <PrivateRoute path="/myquotes" component={MyQuotes} />
         </Switch>
       </Switch>

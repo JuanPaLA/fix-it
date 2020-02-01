@@ -8,6 +8,7 @@ import { Card, Button, Form, CardText, Row, Col,  CardHeader, CardFooter } from 
 import Nav2 from './../nav/nav';
 import Footer from './../footer/footer';
 import './myQuotes.css';
+import { Link } from 'react-router-dom';
 
 class MyQuotes extends Component {
     constructor(props){
@@ -38,6 +39,11 @@ class MyQuotes extends Component {
     }
 
     render(){
+        const newTo = { 
+            pathname: "/category/595212758daa6810cbba4104", 
+            param1: "Par1" 
+          };
+
         return(
             <div>
                 <div>
@@ -55,7 +61,7 @@ class MyQuotes extends Component {
                         </CardText>
                         <Row>
                             <Col>
-                                <Button className="boton" color="info">Update</Button>
+                         
                             </Col>    
                             <Col>
                             <Form> 

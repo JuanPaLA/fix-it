@@ -14,7 +14,6 @@ router.get('/quotes/all', (req, res) => {
 
 //@POST QUOTE
 router.post('/quotes/add', (req, res) => {
-    console.log(req.body)
     const newQuote = new quoteModel({
         descripcion: req.body.descripcion,
         data: req.body.data,
@@ -51,9 +50,9 @@ router.get('/quotes/especiality/:especialidadId', (req, res) => {
     .catch(err => console.log("error getin quotes by specialityId"))
 })
 
-// Delete Student
+// DELETE QUOTE
 router.delete('/quotes/delete/:id', (req, res, next) => {
-    quoteModel.findByIdAndRemove(req.params.id, (error, data) => {
+    quoteModel.findByIdAndRemove({id: req.params._id}, (error, data) => {
       if (error) {
         return next(error);
       } else {
@@ -63,5 +62,15 @@ router.delete('/quotes/delete/:id', (req, res, next) => {
       }
     })
   })
+
+  router.put('/quotes/update/:id', (req, res) => {
+    var db = req.db;
+    var userToUpdate = req.params.id;
+      quoteModel.updateOne({ _id: userToUpdate}, req.body, function (err, result) {
+        res.send(
+            (err === null) ? {msg: ''} : {msg: err}
+        );
+    });
+});
 
 module.exports = router;
