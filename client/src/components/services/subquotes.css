@@ -1,16 +1,16 @@
 .container{
-    width: 100vw;
+    width: inherit;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     margin-top: 2vh;
 }
 
 .cont{
-    width: 100vw;
+    width: inherit;
     padding-bottom: 1vh;
 }
 
 div.toast.fade.show{
-    text-align: center !important;
+    
 }
 
 .th{

@@ -14,6 +14,7 @@ class Login extends Component {
         super(props);
         this.state = {
             activeTab: 1,            
+            navigate: false
         }
         this.toggle = this.toggle.bind(this);
     }
@@ -34,7 +35,7 @@ class Login extends Component {
         return(
             <div>
                 <div>
-                    <Nav2/>
+                    {/* <Nav2/> */}
                 </div>
                 <div className="loginComponent">
                 

@@ -1,50 +1,6 @@
-.App {
-  text-align: center;
-}
-.subheader {
-  margin-top: 5vh;
-  font-style: italic;
-  
-}
-.divisor{
-  background-image: url('./line-divider.png');
-  border: solid gray;
-  /* margin-left: 3vw ;
-  margin-right: 3vw ;
-  max-width: 70%;
-  margin-top: -15vh;
-  margin-bottom: -15vh; */
-}
-
-.text-center {
-  background-color: honeydew;
-  box-shadow: 2px 2px gray;
-}
-.worker{
-  height: 10vh;
-  border-radius: 50%;
-  margin-bottom: 1vh;
-  margin-top: 2vh;
-}
-
-.user{
-  height: 10vh;
-  border-radius: 50%;
-  margin-bottom: 1vh;
-  margin-top: 2vh;
-}
-
-.App-logo {
-  margin-top: 3vh;
-  margin-bottom: 2vh;
-  border-radius: 10%;
-  height: 12vh;
-  box-shadow: 3px 3px black;
-}
-
 .App-header {
   background-color: #faf5f5;
-  min-height: 80vh;
+  min-height: 92.5vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,4 +8,57 @@
   font-size: calc(10px + 2vmin);
   color: white;
   padding-top: 2vh;
+  padding-top: 5vh;
+} 
+
+.subheader {
+  margin-top: 5vh;
+  font-style: italic;
+}  
+
+.divisor{
+  background-image: url('./line-divider.png');
+  border: solid gray;
+}  
+
+.text-center {
+  background-color: honeydew;
+  box-shadow: 2px 2px gray;
+}  
+.worker{
+  height: 12vh;
+  border-radius: 50%;
+  margin-bottom: 1vh;
+  margin-top: 2vh;
+}  
+
+.user{
+  height: 12vh;
+  border-radius: 50%;
+  margin-bottom: 1vh;
+  margin-top: 2vh;
+}  
+
+.App-logo {
+  margin-top: 3vh;
+  margin-bottom: 2vh;
+  border-radius: 10%;
+  height: 12vh;
+  box-shadow: 3px 3px black;
+  
+}  
+
+#userBut{
+  background-image: url('./user.jpg');
+  background-repeat: no-repeat;
+  background-size: contain;
 }
+
+
+
+/* .selectBut {
+  height: 20vh;
+  width: 35vw;
+  border-radius: 30%;
+  
+} */

@@ -1,0 +1,13 @@
+.fixerContainer{
+    background-color: #f9f5f4;
+    min-height: 93vh !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    min-width: 100vw;
+}

@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import React, { Component } from 'react';
 import axios from 'axios';
-import Nav2 from './../nav/nav';
+// import Nav2 from './../nav/nav';
 import Footer from './../footer/footer';
 import './services.css';
 import { Link } from 'react-router-dom';
@@ -60,23 +60,24 @@ class Services extends Component {
 
     render() {
         const { user } = this.props.auth;
-        console.log(this.props.service)
         return (
             <div>
-                <Nav2/>
+                {/* <Nav2/> */}
                 <div className="componentContent">
 
-                <Label style={{color: "black", marginBottom: "2vh"}}>What kind of service do you need?</Label>
+                <Label style={{color: "black", marginBottom: "2vh"}}>
+                    <h4>What kind of service do you need?</h4>
+                </Label>
                     
                     {this.state.specialties.map((spec, i) => 
-                        <div key={i} className="card" style={{width: "95vw", backgroundColor: "black"}}>
+                        <div key={i} className="carder">
                         <div className="card-header" id={`especiality${i}`}>
-                        <span  className="spaner" style={{color: "black"}}><li>{spec.especialidad}</li></span>    
+                        <span  className="spaner"><li>{spec.especialidad}</li></span>    
                         </div>                        
                     
-                        <UncontrolledCollapse color="secondary" toggler={`especiality${i}`}>
+                        <UncontrolledCollapse toggler={`especiality${i}`}>
                         {spec.subespecialidades.map((sub, z) => 
-                                <li key={z} className="list-group-item" style={{color: "black"}}>
+                                <li key={z} className="list-group-item">
                                 <Link to={`/quotes/${spec._id}`}>
                                     {sub}
                                 </Link>                                
@@ -86,14 +87,6 @@ class Services extends Component {
                                                     
                         </div> 
                     )}
-                    {/* <Input type="select" value={this.state.value} onChange={this.handleInputChange} name="especialidad" id="especialidad">
-                    {this.props.service.map((spec, i) =>                                                 
-                        <option  className="spaner" style={{color: "black"}}>{spec.especialidad}</option>                                                    
-                    )}
-                    </Input>
-                    <Input type="select" value={this.state.value} onChange={this.handleInputChange} name="especialidad" id="especialidad">
-                    
-                    </Input> */}
                   </div>
                 <Footer/>
             </div>

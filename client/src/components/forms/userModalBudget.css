@@ -1,0 +1,28 @@
+.priceSpan {
+    font-weight: 600;
+    font-size: 0.9em;
+    text-align: initial;   
+    margin-top: -2vh;
+}
+
+
+.modalBodier{
+    margin-top: -1.5vh;
+
+}
+
+div.modal-footer{
+    margin-top: -1vh;
+    text-align: justify;
+}
+
+#deleteBudget{
+    
+    /* position: relative; */
+    width: 25w;
+}
+
+#acceptBudget{    
+    text-align: center;
+    width: 22vw;
+}

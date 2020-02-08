@@ -30,10 +30,15 @@ app.use(passport.initialize());
 require("./routes/validation/passport")(passport);
 
 mongoose
+
   .connect(db, { useNewUrlParser: true })
   .then(() => console.log('MongoDB connected mother fucker'))
   .catch(err => console.log(err));
 
+mongoose.set('useUnifiedTopology', true);
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
 const services = require('./routes/api/services');

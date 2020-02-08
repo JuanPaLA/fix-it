@@ -1,7 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import React, { Component } from 'react';
-import Nav2 from '../nav/nav';
+// import Nav2 from '../nav/nav';
 import Footer from '../footer/footer';
+import WorkFooter from '../footer/workFooter';
 import './budgets.css';
 import {  FormGroup, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
@@ -32,14 +33,14 @@ class Budgets extends Component {
 
     render(){
         return(
-            <div className="encloser">
-                <Nav2/>
+            <div className="">
+                {/* <Nav2/> */}
                 <div className="cc">
                 <FormGroup>
                     <Label id="label" for="especialidad">
                         <h5>Choose a type of job!</h5>
                     </Label>
-                    <Input type="select" value={this.state.value} onChange={this.handleInputChange} name="especialidad" id="especialidad">
+                    <Input direction="down" type="select" value={this.state.value} onChange={this.handleInputChange} name="especialidad" id="especialidad">
                     {this.props.service.map((spec, i) =>                     
                         <option key={i} className="opt">{spec.especialidad}</option>                    
                     )}
@@ -52,7 +53,7 @@ class Budgets extends Component {
                     }
                 </FormGroup>
                 </div>
-                <Footer/>
+                <WorkFooter/>
             </div>
         )
     }

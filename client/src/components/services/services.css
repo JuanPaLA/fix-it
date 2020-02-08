@@ -1,6 +1,6 @@
 .componentContent{
     background-color: #f9f5f4;
-    min-height: 80vh !important;
+    min-height: 93vh !important;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,37 +12,29 @@
     min-width: 100vw;
   }
 
-div.card{
+  a{
+    /* text-align: center; */
+    color: black !important;
+  }
+
+.carder{
   border-width: 0rem;
   border-collapse: collapse;
-  border-top: 0rem;
-  border-bottom: 0rem;
+  border-top: 0rem !important;
+  border-bottom: 0rem !important;
   border-right: 0rem !important;
+
+  width: 86vw;
+  color: black;
 }
 
-.card-header{
-  text-align: left;
-  font-weight:bold;
-}
-
-.card-header{
-  background-color: #f9f5f4;
-  text-align: left;
-}
 
 li.list-group-item{
   background-color: #D7D7D7;
-  height: 7vh;
+  padding: 0 inherit 0 inherit;
+  height: 6vh;
 }
 
 li.list-group-item a{
   color: black;
-}
-
-.App-logo {
-  margin-top: 1vh;
-  margin-bottom: 2vh;
-  border-radius: 10%;
-  height: 12vh;
-  box-shadow: 3px 3px black;
-}
+} 

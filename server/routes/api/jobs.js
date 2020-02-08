@@ -1,5 +1,7 @@
 const express = require('express')
 const router = express.Router()
+var cors = require('cors');
+router.use(cors())
 
 const jobModel = require('../../model/jobs');
 
@@ -14,21 +16,31 @@ router.get('/jobs/all', (req, res) => {
 
 //@POST QUOTE
 router.post('/jobs/add', (req, res) => {
-    const newQuote = new jobModel({
-        descripcion: req.body.descripcion,
-        data: req.body.data,
-        plazo: req.body.plazo,
-        direccion: req.body.direccion,
-        barrio: req.body.barrio,
-        telefono: req.body.telefono,
-        email: req.body.email,
-        especialidadId: req.body.especialidadId,
+    const newJob = new jobModel({
+        // precio: req.body.precio,
+        // descripcion: req.body.descripcion,
+        quoteId: req.body.quoteId,
+        budgetId: req.body.budgetId,
         userId: req.body.userId,
+        // workerId: req.body.workerId,
     })
-    newQuote.save().then(job => res.json(job))
+    newJob.save().then(job => res.json(job))
     .catch(err => {
         res.status(500).send("Server error on jobs")
     })
 })
 
+//@GET JOB BY ID
+router.get('/jobs/get/:id', (req, res) => {
+    jobModel.findById({_id: req.params.id})
+    .then(job => res.json(job))
+});
+
+
+//GET JOB BY USER-ID
+router.get('/jobs/user/:userId', (req, res) => {
+    jobModel.find({ userId: req.params.userId})
+    .then(job => res.json(job))
+    .catch(err => console.log("error gettting jobs by userId"))
+})
 module.exports = router;

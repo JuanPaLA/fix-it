@@ -1,6 +1,11 @@
-import {GET_BUDGET_BY_QUOTE, POST_BUDGET} from './types';
+import {
+    GET_BUDGET_BY_QUOTE, 
+    POST_BUDGET, 
+    DELETE_BUDGET_BY_QUOTE,
+    REJECT_BUDGET
+} from './types';
 
-export const getJobsByQuote = (id) => async dispatch => {
+export const getBudgetsByQuote = (id) => async dispatch => {
     var datos = await fetch(`http://localhost:5000/api/budgets/quote/${id}`)
     .then(datos => datos.json())
     .catch(err => console.log("error on BudgetActionReducer"));
@@ -22,13 +27,43 @@ export const postBudget = (precio, quoteId, mensaje, workerId, userId) => async 
       'Content-Type': 'application/json'
     }
   };
-    var urls = `http://localhost:5000/api/budgets/add`;
-
+    var urls = `http://localhost:5000/api/budgets/add/${quoteId}`;
     let resp = await fetch(urls, myInit)
-        .then(res => res.json())
+        .then(res => 
+            res.json())
         
     dispatch({
         type: POST_BUDGET,
         payload: resp
     });
+}
+
+export const deleteBudgetByQuote = (id) => async dispatch => {
+    var init = {
+        method: 'DELETE'
+    };
+
+    var url = `http://localhost:5000/api/budgets/delete/byquote/${id}`;
+    let resp = await fetch(url, init)
+    .then(res => res.json())
+
+    dispatch({
+        type: DELETE_BUDGET_BY_QUOTE,
+        payload: resp
+    })
+}
+
+export const rejectBudget = (id) => async dispatch => {
+    var init = {
+        method: 'PUT'
+    }
+
+    var url = `http://localhost:5000/api/budgets/rejectbyquoteid/${id}`;
+    let respo = await fetch(url, init)
+    .then(res => res.json())
+
+    dispatch({
+        type: REJECT_BUDGET,
+        payload: respo
+    })
 }

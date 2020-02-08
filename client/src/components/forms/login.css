@@ -1,5 +1,5 @@
 .loginComponent{
-    height: 78vh;
+    max-height: 93vh !important;
 }
 
 .navl{

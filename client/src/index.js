@@ -1,3 +1,4 @@
+import { Redirect } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -10,6 +11,7 @@ import SignIn from './components/forms/signIn';
 import SignUp from './components/forms/signUp';
 import Quotes from './components/forms/quotes';
 import Login from './components/forms/login';
+import Jobs from './components/services/userJobs';
 import MyQuotes from './components/services/myQuotes';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 //------------REDUX ELEMENTS------------//
@@ -20,6 +22,8 @@ import jwt_decode from "jwt-decode";
 import setAuthToken from "../src/util/setAuthToken";
 import { setCurrentUser, logoutUser } from "../src/redux/actions/authActions";
 import PrivateRoute from "../src/routes/privateRoutes";
+
+
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -53,8 +57,9 @@ ReactDOM.render
         <Switch>
               <PrivateRoute exact path="/services" component={Services} />
               <PrivateRoute exact path="/budgets" component={Budgets} />
-              <PrivateRoute exact path="/quotes/:especialidadId/:id" component={Quotes} />
+              <PrivateRoute exact path="/quotes/:id" component={Quotes} />
               <PrivateRoute path="/myquotes" component={MyQuotes} />
+              <PrivateRoute path="/userjobs" component={Jobs}/>
         </Switch>
       </Switch>
     </Router>

@@ -1,40 +1,10 @@
-#hb{
-    align-content: center;
-    margin-top: 3vh;
-    margin-bottom: 0vh;
-    display: flex;
-    justify-content: center;
-    position: fixed;
-    left: 0;
-    bottom: -10;
+/* SECOND LAYOUT */
+#footCont{
+    background-color:	#ffb9c9 !important;
     width: 100%;
+    max-height: 7vh;   
+    font-weight: 570;
     text-align: center;
-    display: flex;
-  }
-  
-  #homeButton{
-    height: 7vh;
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-  }
-  
-  .p-2{
-      min-height: 10vh;
-      max-height: 10vh;
-      background-color: crimson;
-  }
-
-  .p-2 *{
-    background-color: crimson;
-    margin-bottom: -1vh;
-    margin-top: 0.5vh;
-    
-  }
-
-  .p-2 footer {
-    max-width: 101vw;
-  }
-
-  
-  
+    position: fixed;
+}
 

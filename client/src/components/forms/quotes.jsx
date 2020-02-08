@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, {Component} from 'react';
-import Nav2 from './../nav/nav';
+// import Nav2 from './../nav/nav';
 import Footer from './../footer/footer';
 import { Button, Form, FormGroup, Label, Input, Col, Row } from 'reactstrap';
 import './form.css';
@@ -87,8 +87,8 @@ class Quotes extends Component {
 
     render(){
         return(
-            <div className="encloser">
-                <Nav2/>
+            <div>
+                {/* <Nav2/> */}
                     <div className="componentContentForm">
 
                             {/* --------------- TYPE FORM  ------------- */}
@@ -151,7 +151,13 @@ class Quotes extends Component {
                             </FormGroup>
                             
                             <div style={{textAlign: "center", marginBottom: "2vh"}}>
-                                <Button style={{width: "80vw"}}>Quoting</Button>
+                                <Button style={{
+                                    width: "80vw",
+                                    fontSize: "1.2em",
+                                    fontWeight: "500"
+                                    }}>
+                                    Quoting
+                                </Button>
                             </div>                            
 
                         </Form>

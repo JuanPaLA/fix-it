@@ -1,11 +1,13 @@
+
 const express = require('express')
 const router = express.Router()
 var cors = require('cors');
 router.use(cors())
 
+const quoteModel = require('../../model/quotes');
 const budgetModel = require('../../model/budgets');
 
-//GET budgets
+//GET budgetsssss
 router.get('/budgets/all', (req, res) => {
     budgetModel.find({})
     .then(files => {
@@ -15,8 +17,7 @@ router.get('/budgets/all', (req, res) => {
 });
 
 //POST budget
-router.post('/budgets/add', (req, res) => {
-    console.log(req.body)
+router.post('/budgets/add/:id', (req, res) => {
     const newBudget = new budgetModel({
         // especialidadId: req.body.especialidadId,
         // plazo: req.body.plazo,
@@ -26,40 +27,97 @@ router.post('/budgets/add', (req, res) => {
         workerId: req.body.workerId,
         userId: req.body.userId,
     })
+
     newBudget.save()
-    .then(budget => res.json(budget))
+    .then(budget => 
+      quoteModel.findOneAndUpdate
+      (
+        {_id: req.body.quoteId},
+        {$addToSet: {budgets: 
+            {$each : [budget.id]}}}, {new: true},
+            (err, newAux) => {
+              if(err){
+                res.status(500).send(err)
+              }else{
+                res.status(200).send({budgets: newAux.budgets})}}
+        ))            
     .catch(err => {
         res.status(500).send("Server error on post budgets")
     })
 })
 
-// //@GET budget BY ID
-// router.get('/budgets/:id', (req, res) => {
-//     budgetModel.findById({_id: req.params.id})
-//     .then(budget => res.json(budget))
-// });
+//@GET budget BY ID
+router.get('/budgets/:id', (req, res) => {
+    budgetModel.findById({_id: req.params.id})
+    .then(budget => res.json(budget))
+});
 
-// //GET budget BY QUOTE-ID
-// router.get('/budgets/quote/:quoteId', (req, res) => {
-//     budgetModel.find({ quoteId: req.params.quoteId})
-//     .then(budget => res.json(budget))
-//     .catch(err => console.log("error gettting budgets by quoteId"))
-// })
+//GET budget BY QUOTE-ID
+router.get('/budgets/quote/:quoteId', (req, res) => {
+    budgetModel.find({ quoteId: req.params.quoteId, estado: true})
+    .then(budget => res.json(budget))
+    .catch(err => console.log("error gettting budgets by quoteId"))
+})
 
-// //GET budget BY WORKER-ID
-// router.get('/budgets/quote/:workerId', (req, res) => {
-//     budgetModel.find({ workerId: req.params.workerId})
-//     .then(budget => res.json(budget))
-//     .catch(err => console.log("error gettting budgets by workerId"))
-// })
+//GET budget BY WORKER-ID
+router.get('/budgets/worker/:workerId', (req, res) => {
+    budgetModel.find({ workerId: req.params.workerId})
+    .then(budget => res.json(budget))
+    .catch(err => console.log("error gettting budgets by workerId"))
+})
 
-// //GET budget BY USER-ID
-// router.get('/budgets/quote/:userId', (req, res) => {
-//     budgetModel.find({ userId: req.params.userId})
-//     .then(budget => res.json(budget))
-//     .catch(err => console.log("error gettting budgets by userId"))
-// })
+//GET budget BY USER-ID
+router.get('/budgets/user/:userId', (req, res) => {
+    budgetModel.find({ userId: req.params.userId})
+    .then(budget => res.json(budget))
+    .catch(err => console.log("error gettting budgets by userId"))
+})
 
+
+// DELETE QUOTE
+router.delete('/budgets/delete/:id', (req, res, next) => {
+    budgetModel.findByIdAndRemove({_id: req.params.id}, (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        res.status(200).json({
+          msg: data
+        })
+      }
+    })
+  })
+
+  // DELETE BUDGET BY QUOTEID
+router.delete('/budgets/delete/byquote/:id', (req, res, next) => {
+    budgetModel.deleteMany({ quoteId: req.params.id}, (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        res.status(200).json({
+          msg: data
+        })
+      }
+    })
+  })
+
+
+  //REJECT BUDGET BY QUOTEID
+router.put('/budgets/rejectbyquoteid/:id', (req, res) => {
+  //CHANGING THE STATE OF BUDGET FROM TRUE TO FALSE
+    budgetModel.findOneAndUpdate
+    (
+      { _id: req.params.id},
+      {$set: {estado: false}}, {new: true},
+          (err, newAux) => {
+            if(err){
+              res.status(500).send(err)
+            }else{
+              res.status(200).send({estado: false})}}
+      )            
+  .catch(err => {
+      res.status(500).send("Server error on post budgets")
+  })
+})
 
 
 module.exports = router;

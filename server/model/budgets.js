@@ -7,6 +7,10 @@ const budgetSchema = new mongoose.Schema({
     // plazo: {
     //     type:  String //debería ser DATE --> dd/mm/aaa
     // },
+    estado: { //agregar a reduX y acciones e interfaz
+        type: Boolean,
+        default: true 
+    },
     precio: {
         type: Number 
     },

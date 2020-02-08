@@ -55,19 +55,29 @@ class ModalForm extends Component {
     const user = jwt(token)
     const workerId = user.id;
     this.toggle();
-    // alert(this.props.userId)
-    // alert(this.state.precio, this.props.quoteId, this.state.mensaje, this.props.userId, workerId);
     this.props.postBudget(this.state.precio, this.props.quoteId, this.state.mensaje, this.props.userId, workerId)
+    //AGREGAR PUT-UPDATE SOBRE QUOTE
   }
 
 render(){
   return (      
         <div className="mod">
           <div style={{textAlign: "center"}}>
-            <Button color="danger" onClick={this.toggle} style={{width: "70vw"}}>Budget!</Button>
+            <Button color="danger" 
+            onClick={this.toggle} 
+            style={{width: "70vw"}}>
+              Budget!
+            </Button>
           </div>          
-          <Modal isOpen={this.state.modal} toggle={this.toggle}>
-            <ModalHeader toggle={this.toggle}>Apply your budget!</ModalHeader>
+          <Modal 
+            isOpen={this.state.modal} 
+            toggle={this.toggle}>
+            
+            <ModalHeader 
+              toggle={this.toggle}>
+                Apply your budget!
+            </ModalHeader>
+            
             <ModalBody>
             
             {/* --------INNER FORM-------- */}
@@ -96,6 +106,8 @@ render(){
                 <Input type="textarea" value={this.state.mensaje} onChange={this.handleInputChange} name="mensaje" id="mensaje"/>
               </FormGroup>
             </Form>
+
+              {/* --------END OF INNER FORM ------------- */}
 
             </ModalBody>
             <ModalFooter>

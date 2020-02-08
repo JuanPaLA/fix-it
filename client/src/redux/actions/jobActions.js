@@ -1,4 +1,9 @@
-import { GET_JOBS, POST_JOB, GET_JOB_BY_BUDGET } from './types';
+import { 
+    GET_JOBS, 
+    POST_JOB, 
+    GET_JOB_BY_BUDGET ,
+    GET_JOBS_BY_USER
+} from './types';
 
 export const getJobs = () => async dispatch => {
     var datos = await fetch('http://localhost:5000/api/jobs/all')
@@ -11,22 +16,21 @@ export const getJobs = () => async dispatch => {
     })
 };
 
-export const postJob = (precio) => async dispatch => {
+export const postJob = (budgetId, quoteId, userId) => async dispatch => {
     //cabeceras
     var myInit = {
     method: 'POST',
-    body: precio,
+    body: JSON.stringify({budgetId, quoteId, userId}),
+    mode: 'cors',
     headers: {
-      // 'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json, text/plain, */*',
-      'Content-Type': 'application/json'
+        'Content-Type': 'application/x-www-form-urlencoded', 
+        'Content-Type': 'application/json'
     }
   };
-    //url
     var urls = `http://localhost:5000/api/jobs/add`;
-
-    let resp = await fetch(urls, myInit).then(res => {
-        return res.json()
-      });
+    let resp = await fetch(urls, myInit)
+        .then(res => 
+         res.json())
 
     dispatch({
         type: POST_JOB,
@@ -44,3 +48,14 @@ export const getJobsByBudget = (id) => async dispatch => {
         payload: datos
     })
 };
+
+export const getJobsByUser = (id) => async dispatch => {
+    var datos = await fetch(`http://localhost:5000/api/jobs/user/${id}`)
+    .then(datos => datos.json())
+    .catch(err => console.log(err));
+
+    dispatch({
+        type: GET_JOBS_BY_USER,
+        payload: datos
+    })
+}

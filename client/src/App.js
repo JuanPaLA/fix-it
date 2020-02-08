@@ -4,15 +4,15 @@ import './App.css';
 import Logo from './facebook_cover_photo_1.png';
 import Worker from './worker.jpg';
 import User from './user.jpg';
-import Nav2 from './components/nav/nav';
-import Footer from './components/footer/footer';
+// import Nav2 from './components/nav/nav';
+import DumbFooter from './components/footer/dumbFooter';
 import { Link } from 'react-router-dom';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Nav2 />
+        {/* <Nav2 /> */}
       <header className="App-header">
         <img src={Logo} className="App-logo" alt="logo" />
         <h4 style={{color: "black"}}>Find & Fix!</h4>
@@ -31,7 +31,14 @@ class App extends Component {
           <div className="row">
             <div className="col-6 " align="center">
             <img src={Worker} className="worker" alt="technician"/><br></br>
-              <button type="button" className="btn btn-dark">
+              <button type="button" className="btn btn-danger"
+              style={{
+                height: "13vh",
+                borderRadius: "35%",
+                boxShadow: "2px 2px pink",
+                fontSize: "1.2em"
+              }}
+              >
                 <Link to="/budgets">
                   <span style={{color:"white"}}>Need a Job!</span>
                 </Link>
@@ -40,7 +47,14 @@ class App extends Component {
             </div>
             <div className="col-6 " align="center">
             <img src={User} className="user" alt="user"/><br></br>
-              <button type="button" className="btn btn-dark">
+              <button type="button" className="btn btn-danger"
+              style={{
+                height: "13vh",
+                borderRadius: "35%",
+                boxShadow: "2px 2px pink",
+                fontSize: "1.2em"
+              }}
+              >
                 <Link to='/services'>
                   <span style={{color: "white"}}>Need a Fix!</span>
                 </Link>
@@ -50,7 +64,7 @@ class App extends Component {
          </div>
       </header>
 
-      <Footer/>        
+      <DumbFooter/>        
 
     </div>
     )

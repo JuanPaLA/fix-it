@@ -5,6 +5,9 @@ const quoteSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    budgets : {
+        type: [mongoose.Schema.Types.ObjectId],
+    },
     data: {
         type: String
     },
@@ -19,6 +22,9 @@ const quoteSchema = new mongoose.Schema({
         type: String 
     },
     email : {
+        type: String 
+    },
+    estado: { //agregar a reduz y acciones e interfaz
         type: String 
     },
     especialidadId: {

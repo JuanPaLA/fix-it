@@ -1,4 +1,11 @@
-import {GET_QUOTE_BY_FIELD, POST_QUOTE, GET_QUOTES, GET_QUOTE_BY_USER, DELETE_QUOTE } from './../actions/types';
+import {
+    GET_QUOTE_BY_FIELD, 
+    POST_QUOTE, 
+    GET_QUOTES, 
+    GET_QUOTE_BY_USER, 
+    DELETE_QUOTE,
+    DELETE_BUDGET_IN_QUOTE 
+} from './../actions/types';
 
 export const getQuoteByField = id => async dispatch => {
     var datos = await fetch(`http://localhost:5000/api/quotes/especiality/${id}`)
@@ -60,12 +67,31 @@ export const deleteQuote = (id) => async dispatch => {
     };
 
     var url = `http://localhost:5000/api/quotes/delete/${id}`;
-
     let resp = await fetch(url, init)
     .then(res => res.json())
 
     dispatch({
         type: DELETE_QUOTE,
+        payload: resp
+    })
+}
+
+export const deleteBudgetInQuote = (quoteId, budgetId) => async dispatch => {
+    var init = {
+        method: 'PUT',
+        body: JSON.stringify({quoteId, budgetId}),
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded', 
+            'Content-Type': 'application/json'
+        }
+    };
+    var url =  `http://localhost:5000/api/quotes/rejectbudget/${quoteId}`;
+    let resp = await fetch(url, init)
+    .then(res => res.json())
+
+    dispatch({
+        type: DELETE_BUDGET_IN_QUOTE,
         payload: resp
     })
 }

@@ -1,4 +1,7 @@
-import {POST_JOB, GET_JOBS, GET_JOBS_BY_BUDGET} from './../actions/types';
+import {POST_JOB, 
+    GET_JOBS, 
+    GET_JOB_BY_BUDGET
+} from './../actions/types';
 
 const initialState = {
     jobs : [
@@ -18,7 +21,7 @@ export default function(state = initialState, action) {
                 ...state,
                 jobs: action.payload
             }
-            case GET_JOBS_BY_BUDGET:
+            case GET_JOB_BY_BUDGET:
             return {
                 ...state,
                 jobs: action.payload

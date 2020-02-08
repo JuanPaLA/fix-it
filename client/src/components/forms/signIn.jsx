@@ -1,3 +1,4 @@
+import { Redirect } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import React, {Component} from 'react';
 import { Button, Form, FormGroup, Label, Input, FormText, Col, Row } from 'reactstrap';
@@ -23,7 +24,10 @@ class SignIn extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.auth.isAuthenticated) {
-          this.props.history.push("/services"); // push user to dashboard when they login
+          console.log("AUTENTICADO")
+          this.setState ({
+              login: true
+          })
         }
     if (nextProps.errors) {
           this.setState({
@@ -58,6 +62,9 @@ class SignIn extends Component {
         
 
     render(){
+        if (this.state.login === true) {
+            return <Redirect to='/' />
+          }
         return(            
                 <div className="componentContent">                    
                 {/* -----------ENCABEZADO--------------------- */}
