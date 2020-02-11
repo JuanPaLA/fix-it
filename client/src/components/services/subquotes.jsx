@@ -47,7 +47,7 @@ class SubQuotes extends Component {
                             </Row>                            
                             <br/>
                             
-                            <ModalForm quoteId={q._id} desc={q.descripcion} esp={q.data} userId={q.userId}/>
+                            <ModalForm titulo={q.descripcion} quoteId={q._id} desc={q.descripcion} esp={q.data} userId={q.userId}/>
 
                         </ToastBody>
                     </Toast>

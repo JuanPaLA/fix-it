@@ -10,6 +10,7 @@ export const DELETE_QUOTE = 'DELETE_QUOTE';
 export const DELETE_BUDGET_IN_QUOTE = 'DELETE_BUDGET_IN_QUOTE';
 
 export const GET_BUDGETS = 'GET_BUDGETS';
+export const GET_BUDGET_BY_ID = 'GET_BUDGET_BY_ID';
 export const POST_BUDGET = 'POST_BUDGET';
 export const GET_BUDGET_BY_QUOTE = 'GET_BUDGET_BY_QUOTE';
 export const DELETE_BUDGET_BY_QUOTE = 'DELETE_BUDGET_BY_QUOTE';
@@ -19,6 +20,10 @@ export const GET_JOBS = 'GET_JOBS';
 export const POST_JOB = 'POST_JOB';
 export const GET_JOB_BY_BUDGET = 'GET_JOB_BY_BUDGET';
 export const GET_JOBS_BY_USER = 'GET_JOBS_BY_USER';
+
+export const GET_CHAT_BY_JOBID = 'GGT_CHAT_BY_JOBID';
+
+export const POST_MESSAGE = 'POST_MESSAGE';
 
 /* ---------AUTH  & LOGIN-------------- */
 export const GET_ERRORS = "GET_ERRORS";

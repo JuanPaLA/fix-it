@@ -4,9 +4,9 @@ const budgetSchema = new mongoose.Schema({
     // especialidadId: {
     //     type: mongoose.Schema.Types.ObjectId,
     // },
-    // plazo: {
-    //     type:  String //debería ser DATE --> dd/mm/aaa
-    // },
+    titulo: {
+        type:  String 
+    },
     estado: { //agregar a reduX y acciones e interfaz
         type: Boolean,
         default: true 

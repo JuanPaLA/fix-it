@@ -23,9 +23,8 @@ class UserModalBudget extends Component {
             modal: false,
             navigate: false
         }
-        this.toggle = this.toggle.bind(this)
+        this.toggle = this.toggle.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
         this.rejectingBudget = this.rejectingBudget.bind(this);
         this.confirmingJob = this.confirmingJob.bind(this);
     }
@@ -50,7 +49,7 @@ class UserModalBudget extends Component {
         }
       }
       
-      confirmingJob(a){
+      confirmingJob(a, b, c, d){
           /*
             - 1) Change state of others budgets for the same quote
             - 2) Quit off the visibility of quoteId
@@ -58,7 +57,10 @@ class UserModalBudget extends Component {
           */
          //3
         var budgetId = a;
-        this.props.postJob(budgetId, this.props.quoteId, this.props.userId);
+        var titulo = b;
+        var precio = c;
+        var workerId = d;
+        this.props.postJob(budgetId, this.props.quoteId, this.props.userId, titulo, precio, workerId);
         this.setState ({
             navigate: true
         }) 
@@ -157,14 +159,19 @@ class UserModalBudget extends Component {
                                     <Col>
                                         <Button 
                                         id="acceptBudget"
-                                        onClick={this.confirmingJob.bind(this,`${bud._id}`)}>
+                                        data-mssg={bud.precio}
+                                        onClick={this.confirmingJob.bind(this,
+                                        `${bud._id}`, 
+                                        `${bud.titulo}`, 
+                                        `${bud.precio}`,
+                                        `${bud.workerId}` )}>
                                             Confirm!
                                         </Button>
                                     </Col>
                                     <Col>
                                         <Button 
                                         id="deleteBudget" 
-                                        color="danger"
+                                        color="danger"                                        
                                         onClick={this.rejectingBudget.bind(this, `${bud._id}`)}
                                         >
                                             Reject!

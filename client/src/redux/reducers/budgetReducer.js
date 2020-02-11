@@ -1,4 +1,8 @@
-import { GET_BUDGET_BY_QUOTE, GET_BUDGETS } from '../actions/types';
+import { 
+    GET_BUDGET_BY_QUOTE, 
+    GET_BUDGETS, 
+    GET_BUDGET_BY_ID 
+} from '../actions/types';
 
 const initialState = {
     budgets : [
@@ -18,6 +22,11 @@ export default function(state = initialState, action) {
                 ...state,
                 budgets: action.payload
             }
+        case GET_BUDGET_BY_ID:
+        return {
+            ...state,
+            budgets: action.payload
+        }
             default:
                 return state;
     }

@@ -46,12 +46,16 @@ const quotes = require('./routes/api/quotes');
 const budgets = require('./routes/api/budgets');
 const jobs = require('./routes/api/jobs');
 const users = require('./routes/api/users');
+const chats = require('./routes/api/chats');
+const messages = require('./routes/api/messages');
 
 app.use('/api', quotes);
 app.use('/api', services);
 app.use('/api', budgets);
 app.use('/api', jobs);
 app.use('/api', users);
+app.use('/api', chats);
+app.use('/api', messages);
 
 const port = process.env.PORT || 5000;
 

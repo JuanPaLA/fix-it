@@ -16,11 +16,11 @@ export const getJobs = () => async dispatch => {
     })
 };
 
-export const postJob = (budgetId, quoteId, userId) => async dispatch => {
+export const postJob = (budgetId, quoteId, userId, titulo, precio, workerId) => async dispatch => {
     //cabeceras
     var myInit = {
     method: 'POST',
-    body: JSON.stringify({budgetId, quoteId, userId}),
+    body: JSON.stringify({budgetId, quoteId, userId, titulo, precio, workerId}),
     mode: 'cors',
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded', 
@@ -57,5 +57,5 @@ export const getJobsByUser = (id) => async dispatch => {
     dispatch({
         type: GET_JOBS_BY_USER,
         payload: datos
-    })
+    });
 }

@@ -17,7 +17,8 @@ class ModalForm extends Component {
       user: this.props.user,
       precio: '',
       mensaje: '',
-      plazo: ''
+      plazo: '',
+      titulo: this.props.titulo
     }
     this.toggle = this.toggle.bind(this)
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -25,7 +26,7 @@ class ModalForm extends Component {
   }
 
   async componentDidMount(){
-    console.log(this.props)
+    
 
   }
 
@@ -55,7 +56,8 @@ class ModalForm extends Component {
     const user = jwt(token)
     const workerId = user.id;
     this.toggle();
-    this.props.postBudget(this.state.precio, this.props.quoteId, this.state.mensaje, this.props.userId, workerId)
+
+    this.props.postBudget(this.state.precio, this.props.quoteId, this.state.mensaje, this.props.userId, workerId, this.props.titulo)
     //AGREGAR PUT-UPDATE SOBRE QUOTE
   }
 

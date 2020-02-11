@@ -4,6 +4,7 @@ var cors = require('cors');
 router.use(cors())
 
 const jobModel = require('../../model/jobs');
+const budgetModel = require('../../model/budgets');
 
 //@GET QUOTES
 router.get('/jobs/all', (req, res) => {
@@ -15,20 +16,23 @@ router.get('/jobs/all', (req, res) => {
 });
 
 //@POST QUOTE
-router.post('/jobs/add', (req, res) => {
+router.post('/jobs/add', (req, res) => {    
     const newJob = new jobModel({
-        // precio: req.body.precio,
-        // descripcion: req.body.descripcion,
+        precio: req.body.precio,
         quoteId: req.body.quoteId,
         budgetId: req.body.budgetId,
         userId: req.body.userId,
-        // workerId: req.body.workerId,
+        titulo: req.body.titulo,
+        workerId: req.body.workerId
     })
-    newJob.save().then(job => res.json(job))
+    newJob.save()
+    .then(job => 
+        res.json(job))
     .catch(err => {
         res.status(500).send("Server error on jobs")
-    })
+    })    
 })
+
 
 //@GET JOB BY ID
 router.get('/jobs/get/:id', (req, res) => {

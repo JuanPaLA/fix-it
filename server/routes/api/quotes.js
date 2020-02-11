@@ -28,7 +28,8 @@ router.post('/quotes/add', (req, res) => {
         especialidadId: req.body.especialidadId,
         userId: req.body.userId,
     })
-    newQuote.save().then(quote => res.json(quote))
+    newQuote.save()
+    .then(quote => res.json(quote))
     .catch(err => {
         res.status(500).send("Server error on quotes")
     })

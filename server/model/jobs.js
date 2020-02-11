@@ -7,12 +7,12 @@ const jobSchema = new mongoose.Schema({
     // especialidadId: {
     //     type: mongoose.Schema.Types.ObjectId,
     // },
-    // precio: {
-    //     type: Number 
-    // },
-    // descripcion: {
-    //     type: String 
-    // },
+    precio: {
+        type: Number 
+    },
+    titulo: {
+        type: String 
+    },
     quoteId: {
         type: mongoose.Schema.Types.ObjectId
     },
@@ -22,9 +22,9 @@ const jobSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
     },
-    // workerId: {
-    //     type: mongoose.Schema.Types.ObjectId
-    // }
+    workerId: {
+        type: mongoose.Schema.Types.ObjectId,
+    }
 })
 
 module.exports = mongoose.model('job', jobSchema);

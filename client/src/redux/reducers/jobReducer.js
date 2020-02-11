@@ -1,6 +1,7 @@
 import {POST_JOB, 
     GET_JOBS, 
-    GET_JOB_BY_BUDGET
+    GET_JOB_BY_BUDGET,
+    GET_JOBS_BY_USER
 } from './../actions/types';
 
 const initialState = {
@@ -22,6 +23,11 @@ export default function(state = initialState, action) {
                 jobs: action.payload
             }
             case GET_JOB_BY_BUDGET:
+            return {
+                ...state,
+                jobs: action.payload
+            }
+            case GET_JOBS_BY_USER:
             return {
                 ...state,
                 jobs: action.payload

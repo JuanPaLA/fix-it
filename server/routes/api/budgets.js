@@ -20,7 +20,7 @@ router.get('/budgets/all', (req, res) => {
 router.post('/budgets/add/:id', (req, res) => {
     const newBudget = new budgetModel({
         // especialidadId: req.body.especialidadId,
-        // plazo: req.body.plazo,
+        titulo: req.body.titulo,
         precio: req.body.precio,
         quoteId: req.body.quoteId,
         mensaje: req.body.mensaje,
@@ -47,7 +47,7 @@ router.post('/budgets/add/:id', (req, res) => {
 })
 
 //@GET budget BY ID
-router.get('/budgets/:id', (req, res) => {
+router.get('/budgets/get/:id', (req, res) => {
     budgetModel.findById({_id: req.params.id})
     .then(budget => res.json(budget))
 });
@@ -62,15 +62,19 @@ router.get('/budgets/quote/:quoteId', (req, res) => {
 //GET budget BY WORKER-ID
 router.get('/budgets/worker/:workerId', (req, res) => {
     budgetModel.find({ workerId: req.params.workerId})
-    .then(budget => res.json(budget))
-    .catch(err => console.log("error gettting budgets by workerId"))
+    .then(budget => 
+      res.json(budget))
+    .catch(err => 
+      console.log("error gettting budgets by workerId"))
 })
 
 //GET budget BY USER-ID
 router.get('/budgets/user/:userId', (req, res) => {
     budgetModel.find({ userId: req.params.userId})
-    .then(budget => res.json(budget))
-    .catch(err => console.log("error gettting budgets by userId"))
+    .then(budget => 
+      res.json(budget))
+    .catch(err => 
+      console.log("error gettting budgets by userId"))
 })
 
 
@@ -115,7 +119,8 @@ router.put('/budgets/rejectbyquoteid/:id', (req, res) => {
               res.status(200).send({estado: false})}}
       )            
   .catch(err => {
-      res.status(500).send("Server error on post budgets")
+      res.status(500)
+      .send("Server error on post budgets")
   })
 })
 

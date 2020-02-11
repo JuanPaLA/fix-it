@@ -31,8 +31,6 @@ class MyQuotes extends Component {
             quotes: this.props.quote,
             userId: id
         })
-        console.log(this.state.quotes)
-        console.log(this.state)
     }
 
      toggle(id){
@@ -44,7 +42,6 @@ class MyQuotes extends Component {
     render(){
         return(
             <div>                                
-                {/* <Nav2/>                 */}                
                 <div className="contenido">
                 {this.state.quotes.map((elem, i) => (
                     <Row>

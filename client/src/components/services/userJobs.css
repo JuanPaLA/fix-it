@@ -1,13 +1,55 @@
 .fixerContainer{
     background-color: #f9f5f4;
-    min-height: 93vh !important;
+    height: 93vh !important;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    padding-top: 2vh;
+    min-width: 100vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: start;
-    font-size: calc(10px + 2vmin);
-    color: white;
-    padding-top: 2vh;
-    padding-bottom: 2vh;
-    min-width: 100vw;
 }
+/*COLUMNA DE TRABAJOS PARA SELECCIONAR CHATS */
+#coler1{
+    color: black;
+    max-width: 35vw;    
+}
+
+/* CONTENEDOR DE COLUMNA DE CHATS*/
+#chatboxcontainer{
+    max-height: 70vh;
+    overflow: scroll;
+}
+
+/* BOTONES DE JOBS */
+.spander{
+    width: 100%;
+    margin-bottom: 0.3vh;
+    margin-top: 0.3vh;    
+    margin-left: -3vw;    
+}
+
+/* botones de jobs tmb*/
+li.list-group-item-action.list-group-item{
+    width: 33vw;
+    height: 8vh;
+}
+
+/* CONTENEDOR DE MENSAJES */
+div#inputer{
+    min-height: 52.3vh;
+    max-height: 52.3vh;
+    overflow: scroll;
+    margin-bottom: 1vh;
+    background-color: #f7f8fa;
+    font-size: 0.89;
+}
+
+/*CONTENEDOR DE INPUT*/
+textarea#inputer2.form-control{
+    height: 10vh;
+    margin-bottom: 0.5vh;
+    overflow: scroll;
+}
+
