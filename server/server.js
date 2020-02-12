@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var cors = require('cors');
 const bodyParser = require('body-parser');
 const passport = require("passport");
+const cookieParser = require("cookie-parser");
 var app = express();
 
 const db = require('./config/keys').mongoURI;
@@ -23,14 +24,12 @@ app.use(
 );
 app.use(bodyParser.json());
 
-
 // Passport middleware
-app.use(passport.initialize());
 // Passport config
+app.use(passport.initialize());
 require("./routes/validation/passport")(passport);
 
 mongoose
-
   .connect(db, { useNewUrlParser: true })
   .then(() => console.log('MongoDB connected mother fucker'))
   .catch(err => console.log(err));
