@@ -16,54 +16,76 @@ const io = socketio(server)
 
 /* --------- sockets methods -----------*/
 io.on('connection', (socket) => {
-  //JOIN EMIT METHOD
-  socket.on('user', ({id}, callback) => { //use cb for handling others function at the momento the join emite function is hited
-    const userModel = require('./model/users');
-    userModel.findById({'_id': id})
-    .exec((err, doc) =>{
-      var aux = doc
-      console.log("user " + aux.email)
-      return doc
-    })
-  })
-
-  socket.on('input', ({message, emiter, chatId}) => {
-    //creo objeto mensaje para guardar luego en db
-    const messageModel = require('./model/messages');
+  //FETCHING CHATID EMIT METHOD
+  socket.on('fetching', ({jobId}) => {
+    // const jobModel = require('./model/jobs')
+    // jobModel.findById({ _id: jobId})
     const chatModel = require('./model/chat');
-    const data = new messageModel ({
-      chatId: chatId,
-      emiter: emiter,
-      message: message
-    })
-    messageModel.create(data)
-    chatModel.findOneAndUpdate({_id: chatId}, {$addToSet: {messages:{$each: [data]}}}, {new: true})
-    .exec((err, doc) => {
-      console.log("from linea 44" , doc)
-      return io.emit('output', ({doc}))
-    })
-    
-    
-    //traigo todos los mensajes a través del chatId MODEL
-    // const chatModel = require('./model/chat')
-    // chatModel.find({'_id': chatId})
-    // .exec((err, doc) => {
-    //   console.log("from linea 46" , doc)
-    //   return io.emit('output', ({doc}))
-    // })
-  })
-
-  socket.on('job', ({id})=> {
-    // Bring chat by jobid
-    const chatModel = require('./model/chat')
-    chatModel.find({'jobId': id})
+    chatModel.find({ jobId: jobId})
     .exec((err, doc) =>{
       console.log(doc)
-      return doc
+      return socket.emit('pushing', {doc})
     })
   })
+
+  socket.on('sending', ({message, emiter, chatId}) =>{
+      //creo objeto mensaje para guardar luego en db
+      const messageModel = require('./model/messages');
+      const mensaje = new messageModel ({
+        chatId: chatId,
+        emiter: emiter,
+        message: message
+      })
+      messageModel.create(mensaje)
+  })
+    
+      
+      // const chatModel = require('./model/chat');
+      
+      // chatModel.findOneAndUpdate({_id: chatId}, {$addToSet: {messages:{$each: [data]}}}, {new: true})
+      // .exec((err, doc) => {
+      //   console.log("from linea 44" , doc)
+      //     return io.emit('output', ({doc}))
+      //   })
   
-  socket.on('disconnect', () => {
+  // socket.on('input', ({message, emiter, chatId}) => {
+    //   //creo objeto mensaje para guardar luego en db
+    //   const messageModel = require('./model/messages');
+    //   const chatModel = require('./model/chat');
+    //   const data = new messageModel ({
+      //     chatId: chatId,
+      //     emiter: emiter,
+      //     message: message
+      //   })
+      //   messageModel.create(data)
+      //   chatModel.findOneAndUpdate({_id: chatId}, {$addToSet: {messages:{$each: [data]}}}, {new: true})
+      //   .exec((err, doc) => {
+        //     console.log("from linea 44" , doc)
+        //     return io.emit('output', ({doc}))
+        //   })
+        // })
+        
+        // socket.on('job', ({id})=> {
+          //   // Bring chat by jobid
+          //   const chatModel = require('./model/chat')
+          //   chatModel.find({'jobId': id})
+          //   .exec((err, doc) =>{
+            //     console.log(doc)
+            //     return doc
+            //   })
+            // })
+            
+            //JOIN EMIT METHOD
+            // socket.on('user', ({id}, callback) => { //use cb for handling others function at the momento the join emite function is hited
+            //   const userModel = require('./model/users');
+            //   userModel.findById({'_id': id})
+            //   .exec((err, doc) =>{
+            //     var aux = doc
+            //     console.log("user " + aux.email)
+            //     return doc
+            //   })
+            // })
+            socket.on('disconnect', () => {
     console.log('one user had left')
   })
 })

@@ -45,11 +45,46 @@ class Jobs extends Component {
         socket = io(ENDPOINT);
     }
 
-    componentWillUnmount(){
-        socket.emit('disconnect')
-        socket.off();
+    async selectingJobChat(jobId){        
+        this.setState({
+            jobId: jobId
+        })
+        await this.props.getChatByJobId(jobId);
+        this.setState({
+            chatId: this.props.chat[0]._id
+        })  
+        var chatId = this.state.chatId;
+        console.log(jobId)
+        socket.emit('fetching', {jobId}) 
+        socket.on('pushing', ({doc}, callback) => {
+            this.setState({
+                doc: doc,
+            })            
+        })
     }
-     
+
+    async handleSubmit(event){
+        event.preventDefault();
+        
+        var emiter = this.state.userId; 
+        var message = this.state.inputer2;
+        var chatId = this.state.chatId;
+        
+        socket.emit('sending', ({message, emiter, chatId}))
+        // socket.emit('input', { message, emiter, chatId})
+        // socket.on('output', ({doc}, callback ) => {
+        //     console.log("from CLIENT", doc)      
+        //     this.setState({
+        //         doc: doc.messages
+        //     })      
+        //     console.log("FROM STATE", this.state)
+        // })
+
+        this.setState({
+            inputer2: ''  
+        })
+    }
+
     handleInputChange(evt) {
         const value =
         evt.target.type === "checkbox" ? evt.target.checked : evt.target.value;    
@@ -59,41 +94,14 @@ class Jobs extends Component {
         });
         }
 
-    async handleSubmit(event){
-        event.preventDefault();
-        
-        var emiter = this.state.userId; 
-        var message = this.state.inputer2;
-        var chatId = this.state.chatId;
-        
-        socket.emit('input', { message, emiter, chatId})
-        socket.on('output', ({doc}, callback ) => {
-            console.log("from CLIENT", doc)      
-            this.setState({
-                doc: doc.messages
-            })      
-            console.log("FROM STATE", this.state)
-        })
-
-        this.setState({
-            inputer2: ''  
-        })
+    componentWillUnmount(){
+        socket.emit('disconnect')
+        socket.off();
     }
 
-    async selectingJobChat(id){
-        this.setState({
-            jobId: id
-        })
-        await this.props.getChatByJobId(id);
-        this.setState({
-            // chats: this.props.chat, // DOI FROM SOCKET
-            chatId: this.props.chat[0]._id
-        })  
-        console.log(this.state.chatId)
-        socket.emit('job', {id})
-    }
 
 render(){
+    
     return(
         <div>
             <div className="fixerContainer">
@@ -104,7 +112,7 @@ render(){
                 <Row id="rower">
                     <Col  className="border border-dark" id="coler1">
                     {this.state.jobs.map((aux, y) => (
-                        <div className="spander">
+                        <div key={{y}} className="spander">
 
                         <ListGroupItem  action
                         style={{
@@ -125,15 +133,18 @@ render(){
                     <div id="chatboxcontainer" className="border border-dark">
                             <Form>
                                 <div id="inputer">   
-                                {this.state.doc.map((aux, y) => (
-                                    <div><span className="message-list"
+                                {this.state.doc.map((chat, y) =>(
+                                            chat.messages.map((mes, z) => (
+                                                
+                                                    <span 
+                                                    className="message-list"
                                                     key={{y}} 
                                                     style={{ color: "black"}}>
-                                        {aux.message}
-                                    </span>
-                                    <br></br>
-                                    </div>
-                                ))}
+                                                        {mes.message}
+                                                    <br></br>
+                                                    </span>
+                                            ))                                                                                        
+                                        ))}
                                                                                 
                                 </div>
                             </Form>
