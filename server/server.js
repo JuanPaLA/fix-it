@@ -13,8 +13,6 @@ const socketio = require('socket.io')
 const http = require('http')
 const server = http.createServer(app)
 const io = socketio(server)
-//this for the inner handling task inside sockets emit functions
-const {getJobsByUser} = require('./routes/api/socketDB')
 
 /* --------- sockets methods -----------*/
 io.on('connection', (socket) => {
@@ -29,15 +27,30 @@ io.on('connection', (socket) => {
     })
   })
 
-  socket.on('input', (message, emiter, chatId) => {
+  socket.on('input', ({message, emiter, chatId}) => {
+    //creo objeto mensaje para guardar luego en db
     const messageModel = require('./model/messages');
+    const chatModel = require('./model/chat');
     const data = new messageModel ({
       chatId: chatId,
       emiter: emiter,
-      message: message.message
+      message: message
     })
     messageModel.create(data)
-      return io.emit('output', {message})
+    chatModel.findOneAndUpdate({_id: chatId}, {$addToSet: {messages:{$each: [data]}}}, {new: true})
+    .exec((err, doc) => {
+      console.log("from linea 44" , doc)
+      return io.emit('output', ({doc}))
+    })
+    
+    
+    //traigo todos los mensajes a través del chatId MODEL
+    // const chatModel = require('./model/chat')
+    // chatModel.find({'_id': chatId})
+    // .exec((err, doc) => {
+    //   console.log("from linea 46" , doc)
+    //   return io.emit('output', ({doc}))
+    // })
   })
 
   socket.on('job', ({id})=> {

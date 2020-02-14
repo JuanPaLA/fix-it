@@ -34,12 +34,16 @@
 li.list-group-item-action.list-group-item{
     width: 33vw;
     height: 8vh;
+    background-color: #ffb9c9;
+    font-weight:500 ;
+    overflow: hidden;
 }
 
 /* CONTENEDOR DE MENSAJES */
 div#inputer{
     min-height: 52.3vh;
     max-height: 52.3vh;
+    max-width: 57vw;
     overflow: scroll;
     margin-bottom: 1vh;
     background-color: #f7f8fa;

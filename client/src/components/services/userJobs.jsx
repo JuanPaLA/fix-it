@@ -21,11 +21,11 @@ class Jobs extends Component {
         this.state = {
             userId: '',
             jobs: [],
-            budget:'',
             chats: [],
             inputer2: '',
             chatId: '',
-            jobId: ''
+            jobId: '',
+            doc: []
         }
     this.selectingJobChat = this.selectingJobChat.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -46,8 +46,8 @@ class Jobs extends Component {
     }
 
     componentWillUnmount(){
-        // socket.emit('disconnect')
-        // socket.off();
+        socket.emit('disconnect')
+        socket.off();
     }
      
     handleInputChange(evt) {
@@ -61,16 +61,18 @@ class Jobs extends Component {
 
     async handleSubmit(event){
         event.preventDefault();
+        
         var emiter = this.state.userId; 
         var message = this.state.inputer2;
         var chatId = this.state.chatId;
-        // REDUX FAILED OPTION
-        // this.props.postMessage(this.state.chatId, emiter, message)
-        /*BLANKING INPUT-AREA*/
-        //SOCKET OPTION
+        
         socket.emit('input', { message, emiter, chatId})
-        socket.on('output', ({message}, callback ) => {
-            console.log({message, emiter, chatId})
+        socket.on('output', ({doc}, callback ) => {
+            console.log("from CLIENT", doc)      
+            this.setState({
+                doc: doc.messages
+            })      
+            console.log("FROM STATE", this.state)
         })
 
         this.setState({
@@ -84,7 +86,7 @@ class Jobs extends Component {
         })
         await this.props.getChatByJobId(id);
         this.setState({
-            chats: this.props.chat,
+            // chats: this.props.chat, // DOI FROM SOCKET
             chatId: this.props.chat[0]._id
         })  
         console.log(this.state.chatId)
@@ -122,20 +124,17 @@ render(){
                     <Col>
                     <div id="chatboxcontainer" className="border border-dark">
                             <Form>
-                                <div id="inputer">                                    
-                                        {this.state.chats.map((chat, y) =>(
-                                            chat.messages.map((mes, z) => (
-                                                
-                                                    <span 
-                                                    className="message-list"
+                                <div id="inputer">   
+                                {this.state.doc.map((aux, y) => (
+                                    <div><span className="message-list"
                                                     key={{y}} 
                                                     style={{ color: "black"}}>
-                                                        {mes.message}
-                                                    <br></br>
-                                                    </span>
-                                            ))                                                                                        
-                                        ))}
-                                        
+                                        {aux.message}
+                                    </span>
+                                    <br></br>
+                                    </div>
+                                ))}
+                                                                                
                                 </div>
                             </Form>
                             <Form onSubmit={this.handleSubmit}>
