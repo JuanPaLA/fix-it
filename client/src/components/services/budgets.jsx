@@ -53,7 +53,7 @@ class Budgets extends Component {
                     }
                 </FormGroup>
                 </div>
-                <WorkFooter/>
+                <Footer/>
             </div>
         )
     }

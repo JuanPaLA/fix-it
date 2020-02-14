@@ -13,6 +13,7 @@ import Quotes from './components/forms/quotes';
 import Login from './components/forms/login';
 import Jobs from './components/services/userJobs';
 import MyQuotes from './components/services/myQuotes';
+import Chat from './components/ChahtBox/Chat/Chat';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 //------------REDUX ELEMENTS------------//
 import { Provider } from "react-redux";
@@ -60,6 +61,7 @@ ReactDOM.render
               <PrivateRoute exact path="/quotes/:id" component={Quotes} />
               <PrivateRoute path="/myquotes" component={MyQuotes} />
               <PrivateRoute path="/userjobs" component={Jobs}/>
+              <PrivateRoute path="/chat" component={Chat}/>
         </Switch>
       </Switch>
     </Router>

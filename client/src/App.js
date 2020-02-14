@@ -26,6 +26,10 @@ class App extends Component {
             What are you looking for?            
           </h6>
         </div>
+
+        <Link to="/chat">
+          Chat
+        </Link>
        
         <div className="container-fluid">
           <div className="row">

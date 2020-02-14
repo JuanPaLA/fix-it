@@ -39,6 +39,7 @@ class Services extends Component {
         const user = jwt(token)
         const id = user.id;
         const email = user.email;
+        const name = user.name;
 
         this.setState ({
             id: id,
@@ -47,6 +48,7 @@ class Services extends Component {
 
         console.log(id);
         console.log(email);
+        console.log(name);
 
         await axios.get('http://localhost:5000/api/services/all')
         .then( res => {

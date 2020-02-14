@@ -10,8 +10,10 @@ import { getBudgetById } from "../../redux/actions/budgetActions";
 import { getChatByJobId } from "../../redux/actions/chatActions"
 import { postMessage } from "../../redux/actions/messageActions";
 import { Form, Container, Row, Col, Input, Button, ListGroup, ListGroupItem } from 'reactstrap';
-
+import io from 'socket.io-client';
 import  PropTypes from 'prop-types';
+
+let socket; 
 
 class Jobs extends Component {
     constructor(props){
@@ -30,16 +32,23 @@ class Jobs extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     }
       
-      async componentDidMount(){
-          const token = localStorage.getItem('jwtToken');
-          const user = jwt(token);
-          const id = user.id;
-          await this.props.getJobsByUser(id);
-          this.setState({
-              userId: id,
-              jobs: this.props.job,            
-            })
-        }
+    async componentDidMount(){
+        const ENDPOINT = 'localhost:5000';
+        const token = localStorage.getItem('jwtToken');
+        const user = jwt(token);
+        const id = user.id;
+        await this.props.getJobsByUser(id);
+        this.setState({
+            userId: id,
+            jobs: this.props.job,            
+        })
+        socket = io(ENDPOINT);
+    }
+
+    componentWillUnmount(){
+        // socket.emit('disconnect')
+        // socket.off();
+    }
      
     handleInputChange(evt) {
         const value =
@@ -54,24 +63,32 @@ class Jobs extends Component {
         event.preventDefault();
         var emiter = this.state.userId; 
         var message = this.state.inputer2;
-        this.props.postMessage(this.state.chatId, emiter, message)
+        var chatId = this.state.chatId;
+        // REDUX FAILED OPTION
+        // this.props.postMessage(this.state.chatId, emiter, message)
         /*BLANKING INPUT-AREA*/
+        //SOCKET OPTION
+        socket.emit('input', { message, emiter, chatId})
+        socket.on('output', ({message}, callback ) => {
+            console.log({message, emiter, chatId})
+        })
+
         this.setState({
             inputer2: ''  
         })
-        // await this.props.getChatByJobId(this.state.chatId)
-        // window.location.reload();
     }
 
-    async selectingJobChat(a){
+    async selectingJobChat(id){
         this.setState({
-            jobId: a
+            jobId: id
         })
-        await this.props.getChatByJobId(a);
+        await this.props.getChatByJobId(id);
         this.setState({
             chats: this.props.chat,
             chatId: this.props.chat[0]._id
-        })        
+        })  
+        console.log(this.state.chatId)
+        socket.emit('job', {id})
     }
 
 render(){
