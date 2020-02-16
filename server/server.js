@@ -16,8 +16,13 @@ const io = socketio(server)
 /* --------- sockets methods -----------*/
 io.on('connection', (socket) => {
   console.log('new user connected')
+
+
   socket.on("input", (message, emiter, job) => {
-    // console.log("FROM LINEA 21",  ({message, job, emiter}))
+    //creo un canal-room 
+    socket.join(message.job)
+    
+
     //CREO objeto mensaje para guardar luego en dbs
       const messageModel = require('./model/messages');
       const mensaje = new messageModel ({
@@ -26,7 +31,7 @@ io.on('connection', (socket) => {
         message: message.message
       })
       messageModel.create(mensaje)
-      console.log("from linea 29" , mensaje.jobId)
+      console.log("from linea 29" , mensaje.message)
       
       // modifico el chatId para que contenga el nuevo mensaje
       const jobModel = require('./model/jobs');
@@ -35,44 +40,14 @@ io.on('connection', (socket) => {
           {messages:{$each: [mensaje]}}}, {new: true})
       .exec((true))
 
-
-      return socket.emit('output', (mensaje))
+      return socket.broadcast.to(mensaje.jobId).emit('output', (mensaje))
+      
+      
    })
   
-  
-  //FETCHING CHATID EMIT METHOD
-  // socket.on('fetching', ({jobId}) => {
-  //   const chatModel = require('./model/chat');
-  //   chatModel.find({ jobId: jobId})
-  //   .exec((err, doc) =>{
-  //     console.log(doc)
-  //     return socket.emit('pushing', {doc})
-  //   })
-  // })
-
-  // socket.on('sending', ({message, emiter, chatId}) =>{
-  //     // - 1) creo objeto mensaje para guardar luego en db
-  //     const messageModel = require('./model/messages');
-  //     const mensaje = new messageModel ({
-  //       chatId: chatId,
-  //       emiter: emiter,
-  //       message: message
-  //     })
-  //     messageModel.create(mensaje)
-      
-  //     // - 2) modifico el chatId para que contenga el nuevo mensaje
-  //     const chatModel = require('./model/chat');
-  //     chatModel.findOneAndUpdate({_id: chatId}, 
-  //       {$addToSet: 
-  //         {messages:{$each: [mensaje]}}}, {new: true})
-  //     .exec((err, doc) => {
-  //       console.log("from linea 43" , doc)
-  //         return io.emit('pushing', ({doc}))
-  //       })
-  // })
-    
     socket.on('disconnect', () => {
     console.log('one user had left')
+    
   })
 })
 

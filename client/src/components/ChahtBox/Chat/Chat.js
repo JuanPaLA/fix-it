@@ -21,11 +21,6 @@ class Chat extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    ROOT_CSS = css({
-        height: 600,
-        width: 400
-      });
-
     async componentDidMount(){
         await this.props.getJobById(this.props.jobId)        
         this.setState({
@@ -38,29 +33,51 @@ class Chat extends Component {
         let server = "http://localhost:5000";
         this.socket = io(server);
 
-        this.socket.on("output", mensaje => {
-            console.log(mensaje)
-            //estaria piola poder agregarlo orgánicamente al state
-            //así no lo traemos por redux
-        })
+        
+        
     }
 
    async handleSubmit(event){
-        event.preventDefault();
+       event.preventDefault();
+       this.socket.on()
         var emiter = this.props.user; 
         var message = this.state.input;
         var job = this.state.jobId;
+        var date = Date.now();
 
+        var arrayer = this.state.doc.concat([aux]);
+        
+        console.log(arrayer[arrayer.length-1].message)
+        
+        var aux = {
+            emiter: emiter,
+            message: message,
+            jobId: job,
+            date: date
+        }
+
+        var joined = this.state.doc.concat([aux])
+        this.setState({
+            doc: joined
+        })
+        
         this.socket.emit('input', ({message, emiter, job}))
 
         this.setState({
             input: ''  
         })
 
-        await this.props.getJobById(this.props.jobId)        
-        this.setState({
-            doc: this.props.job.messages            
+        this.socket.on("output", mensaje => {
+            var joined = this.state.doc.concat([mensaje])
+            console.log(joined.length)
+            this.setState({
+                doc: joined
+            })
+            console.log(this.state.doc)
         })
+
+        this.socket.emit('disconnect', this.state.userId)
+        
 
     }
 
