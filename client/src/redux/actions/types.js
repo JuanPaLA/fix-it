@@ -20,6 +20,7 @@ export const GET_JOBS = 'GET_JOBS';
 export const POST_JOB = 'POST_JOB';
 export const GET_JOB_BY_BUDGET = 'GET_JOB_BY_BUDGET';
 export const GET_JOBS_BY_USER = 'GET_JOBS_BY_USER';
+export const GET_JOB_BY_ID = 'GET_JOB_BY_ID';
 
 export const GET_CHAT_BY_JOBID = 'GGT_CHAT_BY_JOBID';
 

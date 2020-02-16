@@ -15,12 +15,15 @@
     "jwt-decode": "^2.2.0",
     "mdbreact": "^4.24.0",
     "moment": "^2.24.0",
+    "query-string": "^6.8.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-emoji": "^0.5.0",
     "react-moment": "^0.9.7",
     "react-redux": "^7.1.3",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
+    "react-scroll-to-bottom": "^1.3.2-master.e829380",
     "reactstrap": "^8.2.0",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
@@ -28,10 +31,7 @@
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
     "socket.io-client": "^2.3.0",
-    "yup": "^0.27.0",
-    "react-scroll-to-bottom": "^1.3.2",
-    "react-emoji": "^0.5.0",
-    "query-string": "^6.8.2"
+    "yup": "^0.27.0"
   },
   "scripts": {
     "start": "react-scripts start",

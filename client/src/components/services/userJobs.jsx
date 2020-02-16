@@ -2,6 +2,7 @@ import { Redirect } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import React, { Component } from 'react';
 import Footer from './../footer/footer';
+import Chat from './../ChahtBox/Chat/Chat'
 import './userJobs.css';
 import jwt from 'jwt-decode' // import dependency
 import { connect } from 'react-redux';
@@ -9,11 +10,8 @@ import { getJobsByUser } from "../../redux/actions/jobActions";
 import { getBudgetById } from "../../redux/actions/budgetActions";
 import { getChatByJobId } from "../../redux/actions/chatActions"
 import { postMessage } from "../../redux/actions/messageActions";
-import { Form, Container, Row, Col, Input, Button, ListGroup, ListGroupItem } from 'reactstrap';
-import io from 'socket.io-client';
+import { Container, Row, Col, ListGroupItem } from 'reactstrap';
 import  PropTypes from 'prop-types';
-
-let socket; 
 
 class Jobs extends Component {
     constructor(props){
@@ -21,19 +19,12 @@ class Jobs extends Component {
         this.state = {
             userId: '',
             jobs: [],
-            chats: [],
-            inputer2: '',
-            chatId: '',
             jobId: '',
-            doc: []
         }
     this.selectingJobChat = this.selectingJobChat.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     }
       
     async componentDidMount(){
-        const ENDPOINT = 'localhost:5000';
         const token = localStorage.getItem('jwtToken');
         const user = jwt(token);
         const id = user.id;
@@ -42,66 +33,15 @@ class Jobs extends Component {
             userId: id,
             jobs: this.props.job,            
         })
-        socket = io(ENDPOINT);
     }
 
     async selectingJobChat(jobId){        
         this.setState({
             jobId: jobId
         })
-        await this.props.getChatByJobId(jobId);
-        this.setState({
-            chatId: this.props.chat[0]._id
-        })  
-        var chatId = this.state.chatId;
-        console.log(jobId)
-        socket.emit('fetching', {jobId}) 
-        socket.on('pushing', ({doc}, callback) => {
-            this.setState({
-                doc: doc,
-            })            
-        })
     }
-
-    async handleSubmit(event){
-        event.preventDefault();
-        
-        var emiter = this.state.userId; 
-        var message = this.state.inputer2;
-        var chatId = this.state.chatId;
-        
-        socket.emit('sending', ({message, emiter, chatId}))
-        // socket.emit('input', { message, emiter, chatId})
-        // socket.on('output', ({doc}, callback ) => {
-        //     console.log("from CLIENT", doc)      
-        //     this.setState({
-        //         doc: doc.messages
-        //     })      
-        //     console.log("FROM STATE", this.state)
-        // })
-
-        this.setState({
-            inputer2: ''  
-        })
-    }
-
-    handleInputChange(evt) {
-        const value =
-        evt.target.type === "checkbox" ? evt.target.checked : evt.target.value;    
-        this.setState({
-            ...this.state,
-            [evt.target.name] : value
-        });
-        }
-
-    componentWillUnmount(){
-        socket.emit('disconnect')
-        socket.off();
-    }
-
 
 render(){
-    
     return(
         <div>
             <div className="fixerContainer">
@@ -130,46 +70,21 @@ render(){
                     </Col>
 
                     <Col>
-                    <div id="chatboxcontainer" className="border border-dark">
-                            <Form>
-                                <div id="inputer">   
-                                {this.state.doc.map((chat, y) =>(
-                                            chat.messages.map((mes, z) => (
-                                                
-                                                    <span 
-                                                    className="message-list"
-                                                    key={{y}} 
-                                                    style={{ color: "black"}}>
-                                                        {mes.message}
-                                                    <br></br>
-                                                    </span>
-                                            ))                                                                                        
-                                        ))}
-                                                                                
-                                </div>
-                            </Form>
-                            <Form onSubmit={this.handleSubmit}>
-                                <Input 
-                                    id="inputer2" 
-                                    type="textarea"
-                                    value={this.state.inputer2} 
-                                    onChange={this.handleInputChange} 
-                                    name="inputer2" 
-                                    />
-                                
-                                <div 
-                                    style={{
-                                        textAlign: "center"
-                                        }}>
-                                <Button                                                                         
-                                    style={{
-                                        width: "95%",
-                                        textAlign: "center"
-                                    }}>
-                                    Send
-                                </Button>
-                                </div>
-                            </Form>
+                    <div 
+                    id="chatboxcontainer" 
+                    className="border border-dark"
+                    style={{width: "40vw", height: "70vh"}}>
+                    
+                    {this.state.jobId !=0 ? (
+                        <div style={{color:"black"}}>
+                            <Chat jobId={this.state.jobId} user={this.state.userId}/>
+                        </div>
+                    ):(
+                        <div style={{color:"black"}}>
+                            
+                        </div>
+                    )}
+                    
                     </div>
                     </Col>
                 </Row>

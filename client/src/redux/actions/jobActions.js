@@ -2,7 +2,8 @@ import {
     GET_JOBS, 
     POST_JOB, 
     GET_JOB_BY_BUDGET ,
-    GET_JOBS_BY_USER
+    GET_JOBS_BY_USER,
+    GET_JOB_BY_ID
 } from './types';
 
 export const getJobs = () => async dispatch => {
@@ -14,6 +15,19 @@ export const getJobs = () => async dispatch => {
         type: GET_JOBS,
         payload: datos
     })
+};
+
+export const getJobById = (id) => async dispatch => {
+    var datos = await fetch(`http://localhost:5000/api/jobs/${id}`)
+    .then(datos => 
+        datos.json())
+    .catch(err => 
+        console.log(err));
+
+    dispatch({
+        type: GET_JOB_BY_ID,
+        payload: datos
+    });
 };
 
 export const postJob = (budgetId, quoteId, userId, titulo, precio, workerId) => async dispatch => {

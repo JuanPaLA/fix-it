@@ -5,7 +5,6 @@ var cors = require('cors');
 router.use(cors())
 
 const quoteModel = require('../../model/quotes');
-const budgetModel = require('../../model/budgets');
 
 //@GET QUOTES
 router.get('/quotes/all', (req, res) => {
@@ -38,7 +37,8 @@ router.post('/quotes/add', (req, res) => {
 //@GET QUOTE BY ID
 router.get('/quotes/:id', (req, res) => {
     quoteModel.findById({_id: req.params.id})
-    .then(quote => res.json(quote))
+    .then(quote => 
+      res.json(quote))
 });
 
 //@GET QUOTE BY USER_ID

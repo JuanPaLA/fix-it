@@ -12,6 +12,9 @@ const messageSchema = new mongoose.Schema({
     chatId: {
         type: mongoose.Schema.Types.ObjectId,
     },
+    jobId: {
+        type: mongoose.Schema.Types.ObjectId,
+    },
     message: {
         type: String
     },

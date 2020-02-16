@@ -3,7 +3,6 @@ var mongoose = require('mongoose');
 var cors = require('cors');
 const bodyParser = require('body-parser');
 const passport = require("passport");
-const cookieParser = require("cookie-parser");
 var app = express();
 
 const db = require('./config/keys').mongoURI;
@@ -16,76 +15,63 @@ const io = socketio(server)
 
 /* --------- sockets methods -----------*/
 io.on('connection', (socket) => {
-  //FETCHING CHATID EMIT METHOD
-  socket.on('fetching', ({jobId}) => {
-    // const jobModel = require('./model/jobs')
-    // jobModel.findById({ _id: jobId})
-    const chatModel = require('./model/chat');
-    chatModel.find({ jobId: jobId})
-    .exec((err, doc) =>{
-      console.log(doc)
-      return socket.emit('pushing', {doc})
-    })
-  })
-
-  socket.on('sending', ({message, emiter, chatId}) =>{
-      //creo objeto mensaje para guardar luego en db
+  console.log('new user connected')
+  socket.on("input", (message, emiter, job) => {
+    // console.log("FROM LINEA 21",  ({message, job, emiter}))
+    //CREO objeto mensaje para guardar luego en dbs
       const messageModel = require('./model/messages');
       const mensaje = new messageModel ({
-        chatId: chatId,
-        emiter: emiter,
-        message: message
+        jobId: message.job,
+        emiter: message.emiter,
+        message: message.message
       })
       messageModel.create(mensaje)
-  })
-    
+      console.log("from linea 29" , mensaje.jobId)
       
-      // const chatModel = require('./model/chat');
-      
-      // chatModel.findOneAndUpdate({_id: chatId}, {$addToSet: {messages:{$each: [data]}}}, {new: true})
-      // .exec((err, doc) => {
-      //   console.log("from linea 44" , doc)
-      //     return io.emit('output', ({doc}))
-      //   })
+      // modifico el chatId para que contenga el nuevo mensaje
+      const jobModel = require('./model/jobs');
+      jobModel.findOneAndUpdate({_id: mensaje.jobId}, 
+        {$addToSet: 
+          {messages:{$each: [mensaje]}}}, {new: true})
+      .exec((true))
+
+
+      return socket.emit('output', (mensaje))
+   })
   
-  // socket.on('input', ({message, emiter, chatId}) => {
-    //   //creo objeto mensaje para guardar luego en db
-    //   const messageModel = require('./model/messages');
-    //   const chatModel = require('./model/chat');
-    //   const data = new messageModel ({
-      //     chatId: chatId,
-      //     emiter: emiter,
-      //     message: message
-      //   })
-      //   messageModel.create(data)
-      //   chatModel.findOneAndUpdate({_id: chatId}, {$addToSet: {messages:{$each: [data]}}}, {new: true})
-      //   .exec((err, doc) => {
-        //     console.log("from linea 44" , doc)
-        //     return io.emit('output', ({doc}))
-        //   })
-        // })
-        
-        // socket.on('job', ({id})=> {
-          //   // Bring chat by jobid
-          //   const chatModel = require('./model/chat')
-          //   chatModel.find({'jobId': id})
-          //   .exec((err, doc) =>{
-            //     console.log(doc)
-            //     return doc
-            //   })
-            // })
-            
-            //JOIN EMIT METHOD
-            // socket.on('user', ({id}, callback) => { //use cb for handling others function at the momento the join emite function is hited
-            //   const userModel = require('./model/users');
-            //   userModel.findById({'_id': id})
-            //   .exec((err, doc) =>{
-            //     var aux = doc
-            //     console.log("user " + aux.email)
-            //     return doc
-            //   })
-            // })
-            socket.on('disconnect', () => {
+  
+  //FETCHING CHATID EMIT METHOD
+  // socket.on('fetching', ({jobId}) => {
+  //   const chatModel = require('./model/chat');
+  //   chatModel.find({ jobId: jobId})
+  //   .exec((err, doc) =>{
+  //     console.log(doc)
+  //     return socket.emit('pushing', {doc})
+  //   })
+  // })
+
+  // socket.on('sending', ({message, emiter, chatId}) =>{
+  //     // - 1) creo objeto mensaje para guardar luego en db
+  //     const messageModel = require('./model/messages');
+  //     const mensaje = new messageModel ({
+  //       chatId: chatId,
+  //       emiter: emiter,
+  //       message: message
+  //     })
+  //     messageModel.create(mensaje)
+      
+  //     // - 2) modifico el chatId para que contenga el nuevo mensaje
+  //     const chatModel = require('./model/chat');
+  //     chatModel.findOneAndUpdate({_id: chatId}, 
+  //       {$addToSet: 
+  //         {messages:{$each: [mensaje]}}}, {new: true})
+  //     .exec((err, doc) => {
+  //       console.log("from linea 43" , doc)
+  //         return io.emit('pushing', ({doc}))
+  //       })
+  // })
+    
+    socket.on('disconnect', () => {
     console.log('one user had left')
   })
 })

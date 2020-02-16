@@ -2,13 +2,22 @@ const express = require('express')
 const router = express.Router()
 var cors = require('cors');
 router.use(cors())
+var mongo = require('mongoose');
 
 const jobModel = require('../../model/jobs');
-const budgetModel = require('../../model/budgets');
 
 //@GET QUOTES
 router.get('/jobs/all', (req, res) => {
     jobModel.find({})
+    .then(files => {
+        res.send(files)
+    })
+    .catch(err => console.log(err));
+});
+
+//@GET QUOTES
+router.get('/jobs/:id', (req, res) => {
+    jobModel.findById({ _id: req.params.id})
     .then(files => {
         res.send(files)
     })
@@ -34,11 +43,11 @@ router.post('/jobs/add', (req, res) => {
 })
 
 
-//@GET JOB BY ID
-router.get('/jobs/get/:id', (req, res) => {
-    jobModel.findById({_id: req.params.id})
-    .then(job => res.json(job))
-});
+// //@GET JOB BY ID
+// router.get('/jobs/get/:id', (req, res) => {
+//     jobModel.findById({_id: req.params.id})
+//     .then(job => res.json(job))
+// });
 
 
 //GET JOB BY USER-ID

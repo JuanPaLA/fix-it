@@ -19,7 +19,8 @@
 /* CONTENEDOR DE COLUMNA DE CHATS*/
 #chatboxcontainer{
     max-height: 70vh;
-    overflow: scroll;
+    min-width: 59vw;
+
 }
 
 /* BOTONES DE JOBS */
@@ -32,11 +33,12 @@
 
 /* botones de jobs tmb*/
 li.list-group-item-action.list-group-item{
-    width: 33vw;
+    width: 20vw;
     height: 8vh;
     background-color: #ffb9c9;
     font-weight:500 ;
     overflow: hidden;
+    padding: 0 0 0 0 ;
 }
 
 /* CONTENEDOR DE MENSAJES */
@@ -56,4 +58,5 @@ textarea#inputer2.form-control{
     margin-bottom: 0.5vh;
     overflow: scroll;
 }
+
 

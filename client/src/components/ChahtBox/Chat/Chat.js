@@ -1,50 +1,145 @@
-import React, {useState, useEffect} from 'react'
-import queryString from 'query-string';
+import React, {useState, useEffect, Component} from 'react'
 import io from 'socket.io-client';
-import jwt from 'jwt-decode' // import dependency
+import { Form, Input, Button } from 'reactstrap';
+import '../../services/userJobs.css';
+import { connect } from 'react-redux';
+import { getJobById } from "../../../redux/actions/jobActions";
+import  PropTypes from 'prop-types';
+import ScrollToBottom from 'react-scroll-to-bottom';
+import { css } from 'glamor';
 
-let socket; 
-
-const Chat = () => {
-    const [email, setEmail] = useState('')
-    const [id, setId] = useState('')
-    const ENDPOINT = 'localhost:5000';
-
-    //THIS IS EXECUTEN ON MOUNTING
-    useEffect(()=>{
-        //Retrieve user data identification
-        const token = localStorage.getItem('jwtToken');
-        const user = jwt(token)
-        const id = user.id;
-        const email = user.email;
-        console.log(id)
-        
-        socket = io(ENDPOINT);
-        
-        setEmail(email);
-        setId(id);
-
-        //EMITING THROUGH SOCKET TO SERVER FROM CLIENT
-        socket.emit('user', {email, id})
-
-        //DISCONNECT SOCKET AT THE UNMOUNTING OF THE COMPONENT 
-        //THAT HAPPENS WITH THIS RETURN OF THE USEEFFECT
-        return () => {
-            socket.emit('disconnect')
-            socket.off();
+class Chat extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            jobId: '',
+            job: [],
+            doc: [],
+            input: ''
         }
-    }, [ENDPOINT, email, id]);
-    
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
 
+    ROOT_CSS = css({
+        height: 600,
+        width: 400
+      });
 
-    return(
-        <div>
-        <h1>Chat</h1>
-        <div>
+    async componentDidMount(){
+        await this.props.getJobById(this.props.jobId)        
+        this.setState({
+            jobId: this.props.jobId,
+            job: this.props.job,
+            userId: this.props.user,
+            doc: this.props.job.messages            
+        })
+        console.log(this.state)
+        let server = "http://localhost:5000";
+        this.socket = io(server);
 
-        </div>
-        </div>
-    )
+        this.socket.on("output", mensaje => {
+            console.log(mensaje)
+            //estaria piola poder agregarlo orgánicamente al state
+            //así no lo traemos por redux
+        })
+    }
+
+   async handleSubmit(event){
+        event.preventDefault();
+        var emiter = this.props.user; 
+        var message = this.state.input;
+        var job = this.state.jobId;
+
+        this.socket.emit('input', ({message, emiter, job}))
+
+        this.setState({
+            input: ''  
+        })
+
+        await this.props.getJobById(this.props.jobId)        
+        this.setState({
+            doc: this.props.job.messages            
+        })
+
+    }
+
+    handleInputChange(evt) {
+        const value =
+        evt.target.type === "checkbox" ? evt.target.checked : evt.target.value;    
+        this.setState({
+            ...this.state,
+            [evt.target.name] : value
+        });
+        }
+
+    componentWillUnmount(){
+        this.socket.emit('disconnect')
+        this.socket.off();
+    }
+
+    render(){
+        return(
+            <div>
+                <div>
+                <Form>
+                        <div id="inputer">   
+                            <ScrollToBottom>
+                                
+                                    {this.state.doc.length}
+
+                                    {this.state.doc.map((m,z)=>(
+                                        <span style={{paddingLeft: "1px"}}>
+                                            {m.message}
+                                            <br></br>
+                                        </span>
+                                    ))}
+                                
+                                    </ScrollToBottom>                            
+                        </div>
+                    </Form>
+                    <Form onSubmit={this.handleSubmit}>
+                        <Input 
+                            id="input" 
+                            type="textarea"
+                            value={this.state.input} 
+                            onChange={this.handleInputChange} 
+                            name="input" 
+                            />
+                        
+                        <div 
+                            style={{
+                                textAlign: "center"
+                                }}>
+                        <Button                                                                         
+                            type="submit"
+                            onSubmit={this.handleSubmit}
+                            style={{
+                                width: "95%",
+                                textAlign: "center"
+                            }}>
+                            Send
+                        </Button>
+                        </div>
+                    </Form>
+                </div>  
+            </div>
+        )
+    }
 }
 
-export default Chat;
+Chat.propTypes = {
+    job: PropTypes.array.isRequired, //represents the state
+    getJobById: PropTypes.func.isRequired,
+}
+
+const mapStateToProps = (state) => ({
+    //called like in the rootReducer
+    job: state.job.jobs,
+}) 
+
+export default connect(mapStateToProps, 
+    { getJobById})
+    (Chat);
+
+    

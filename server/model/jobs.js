@@ -1,12 +1,6 @@
 const mongoose = require('mongoose');
 
 const jobSchema = new mongoose.Schema({
-    // plazo: {
-    //     type:  String //debería ser DATE --> dd/mm/aaa
-    // },
-    // especialidadId: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    // },
     precio: {
         type: Number 
     },
@@ -24,6 +18,9 @@ const jobSchema = new mongoose.Schema({
     },
     workerId: {
         type: mongoose.Schema.Types.ObjectId,
+    },
+    messages: {
+        type: Array
     }
 })
 
