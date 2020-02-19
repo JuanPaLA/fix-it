@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { getJobById } from "../../../redux/actions/jobActions";
 import  PropTypes from 'prop-types';
 import ScrollToBottom from 'react-scroll-to-bottom';
-import { css } from 'glamor';
 
 class Chat extends Component {
     constructor(props){
@@ -32,9 +31,6 @@ class Chat extends Component {
         console.log(this.state)
         let server = "http://localhost:5000";
         this.socket = io(server);
-
-        
-        
     }
 
    async handleSubmit(event){
@@ -47,7 +43,7 @@ class Chat extends Component {
 
         var arrayer = this.state.doc.concat([aux]);
         
-        console.log(arrayer[arrayer.length-1].message)
+        // console.log(arrayer[arrayer.length-1].message)
         
         var aux = {
             emiter: emiter,
@@ -147,7 +143,7 @@ class Chat extends Component {
 
 Chat.propTypes = {
     job: PropTypes.array.isRequired, //represents the state
-    getJobById: PropTypes.func.isRequired,
+    getJobById: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({

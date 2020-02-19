@@ -2,7 +2,8 @@ import {POST_JOB,
     GET_JOBS, 
     GET_JOB_BY_BUDGET,
     GET_JOBS_BY_USER,
-    GET_JOB_BY_ID
+    GET_JOB_BY_ID,
+    GET_JOB_BY_WORKERID
 } from './../actions/types';
 
 const initialState = {
@@ -38,6 +39,11 @@ export default function(state = initialState, action) {
                     ...state,
                     jobs: action.payload
                 }
+                case GET_JOB_BY_WORKERID:
+                    return {
+                        ...state,
+                        jobs: action.payload
+                    }
             default:
                 return state;
     }

@@ -14,7 +14,7 @@ class ModalForm extends Component {
       quoteId: this.props.id,
       esp: this.props.esp,
       desc: this.props.desc,
-      user: this.props.user,
+      user: this.props.userId,
       precio: '',
       mensaje: '',
       plazo: '',
@@ -26,8 +26,9 @@ class ModalForm extends Component {
   }
 
   async componentDidMount(){
-    
-
+    const token = localStorage.getItem('jwtToken');
+    const worker = jwt(token)
+    const workerId = worker.id; 
   }
 
   toggle(){

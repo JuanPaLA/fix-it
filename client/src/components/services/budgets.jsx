@@ -1,7 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import React, { Component } from 'react';
-// import Nav2 from '../nav/nav';
-import Footer from '../footer/footer';
 import WorkFooter from '../footer/workFooter';
 import './budgets.css';
 import {  FormGroup, Label, Input } from 'reactstrap';
@@ -34,7 +32,6 @@ class Budgets extends Component {
     render(){
         return(
             <div className="">
-                {/* <Nav2/> */}
                 <div className="cc">
                 <FormGroup>
                     <Label id="label" for="especialidad">
@@ -53,7 +50,7 @@ class Budgets extends Component {
                     }
                 </FormGroup>
                 </div>
-                <Footer/>
+                <WorkFooter/>
             </div>
         )
     }

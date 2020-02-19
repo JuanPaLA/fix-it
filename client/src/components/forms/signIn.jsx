@@ -1,13 +1,12 @@
 import { Redirect } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import React, {Component} from 'react';
-import { Button, Form, FormGroup, Label, Input, FormText, Col, Row } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Col, Row } from 'reactstrap';
 import './signIn.css';
-import {Link, withRouter} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import  PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginUser } from "../../redux/actions/authActions";
-import classnames from "classnames";
 
 
 class SignIn extends Component {
@@ -103,7 +102,7 @@ class SignIn extends Component {
                             </Row>
                         </div>
                     </Form>
-                    <p style={{color:"black"}}> Don't have an account? <Link to="/sign-up">Register</Link></p>
+                    <p style={{color:"black"}}> Don't have an account? <Link to="/sign-up"><span style={{color:"blue"}}> Register </span></Link></p>
                 </div>
             </div>
         </div>

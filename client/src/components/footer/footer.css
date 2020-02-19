@@ -5,6 +5,7 @@
     max-height: 7vh;   
     font-weight: 570;
     text-align: center;
+    background-image: linear-gradient(#f0ccd4, 	#ffb9c9);
     position: fixed;
 }
 

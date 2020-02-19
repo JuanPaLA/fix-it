@@ -4,11 +4,18 @@ import './App.css';
 import Logo from './facebook_cover_photo_1.png';
 import Worker from './worker.jpg';
 import User from './user.jpg';
-// import Nav2 from './components/nav/nav';
 import DumbFooter from './components/footer/dumbFooter';
 import { Link } from 'react-router-dom';
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      rol: ''
+    }
+    
+  }
+
   render() {
     return (
       <div>
@@ -51,7 +58,8 @@ class App extends Component {
             </div>
             <div className="col-6 " align="center">
             <img src={User} className="user" alt="user"/><br></br>
-              <button type="button" className="btn btn-danger"
+              <button type="button" 
+              className="btn btn-danger"
               style={{
                 height: "13vh",
                 borderRadius: "35%",

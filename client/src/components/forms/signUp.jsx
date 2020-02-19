@@ -1,12 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';  
-import React, { Component, useState } from 'react';
-import { Button, Form, FormGroup, Label, Input, FormText, Col, Row } from 'reactstrap';
+import React, { Component } from 'react';
+import { Button, Form, FormGroup, Label, Input, CustomInput, } from 'reactstrap';
 import './signUp.css';
 import {Link, withRouter} from 'react-router-dom';
 import  PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { registerUser } from "../../redux/actions/authActions";
-import classnames from "classnames";
 
 class SignUp extends Component {
     constructor(props){
@@ -16,7 +15,7 @@ class SignUp extends Component {
             email: '',
             password: '',
             pic: '',
-            rol: '',
+            rol: false,
             errors: {}
         }
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -88,12 +87,24 @@ class SignUp extends Component {
                             onChange={this.handleInputChange} />
                         </FormGroup>    
                         
+                        <div style={{textAlign: "center"}}>
+                        <FormGroup>
+                            <Label for="rol">¿Are you looking for a job too?</Label>
+                              <CustomInput type="switch" id="rol" name="rol"/>
+                        </FormGroup>
+                        </div>
+                        
+                        
                         <div className="buthold">
                             <Button type="submit" id="bs">Submit</Button>
                         </div>                        
                     </Form>
 
-                    <p style={{color:"black"}}> Already have an account? <Link to="/sign-in">Register</Link></p>
+                    <p style={{color:"black"}}> Already have an account? 
+                      <Link to="/sign-in">
+                          <span style={{color:"blue"}}> Login </span>
+                      </Link>
+                    </p>
                     </div>
                 </div>
             </div>

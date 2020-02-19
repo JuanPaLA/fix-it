@@ -1,7 +1,7 @@
 /* Esto es para el label */
 .encloser{
     max-width: 100vw;
-    height: 100vh;
+    
 }
 
 /* Contenedor del componente */
@@ -9,7 +9,6 @@
     background-color: #faf5f5;
     min-height: 93vh;
     font-size: calc(10px + 2vmin);
-    /* color: white; */
     min-width: 100vw;
     padding-top: 3vh;
 }

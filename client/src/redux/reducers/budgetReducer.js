@@ -1,7 +1,8 @@
 import { 
     GET_BUDGET_BY_QUOTE, 
     GET_BUDGETS, 
-    GET_BUDGET_BY_ID 
+    GET_BUDGET_BY_ID,
+    GET_BUDGET_BY_WORKERID 
 } from '../actions/types';
 
 const initialState = {
@@ -23,6 +24,11 @@ export default function(state = initialState, action) {
                 budgets: action.payload
             }
         case GET_BUDGET_BY_ID:
+        return {
+            ...state,
+            budgets: action.payload
+        }
+        case GET_BUDGET_BY_WORKERID:
         return {
             ...state,
             budgets: action.payload

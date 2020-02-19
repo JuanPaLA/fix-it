@@ -1,0 +1,14 @@
+.mybudgetContent{
+    min-height: 93vh;
+}
+
+.mybudgetContent{
+    min-height: 93vh;
+    background-color: #faf5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    min-width: 100vw;
+    padding-top: 2vh;   
+}

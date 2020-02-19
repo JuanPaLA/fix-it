@@ -33,7 +33,7 @@ class WorkFooter extends Component {
                         textAlign: "center"                        
                     }}>
                     <Col style={{
-                    width: "33%",
+                    width: "21%",
                 }}>
                     <NavItem>
                     <NavLink>                    
@@ -44,26 +44,39 @@ class WorkFooter extends Component {
                     </NavItem>
                     </Col>    
                     <Col style={{
-                    width: "33%",
+                    width: "24%",
                 }}>
                     <NavItem>
                     <NavLink>
                         <Link to="/budgets">
-                            Budgets
+                            Jobs!
                         </Link>
                         </NavLink>
                         </NavItem>
                     </Col>
                     <Col style={{
-                    width: "33%", 
+                    width: "26%", 
                 }}>
                         <NavItem>
                         <NavLink>
-                            <Link to="/myquotes">
-                                Quotes
+                            <Link to="/mybudgets">
+                                Budgets
                             </Link>
                         </NavLink>
                         </NavItem>
+                        
+                    </Col>
+                    <Col style={{
+                    width: "27%", 
+                }}>
+                        <NavItem>
+                        <NavLink>
+                            <Link to="/workerJOB">
+                                Chat!
+                            </Link>
+                        </NavLink>
+                        </NavItem>
+                        
                     </Col>
                     </Row>
                 </Nav>      

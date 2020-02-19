@@ -23,6 +23,8 @@ import jwt_decode from "jwt-decode";
 import setAuthToken from "../src/util/setAuthToken";
 import { setCurrentUser, logoutUser } from "../src/redux/actions/authActions";
 import PrivateRoute from "../src/routes/privateRoutes";
+import MyBudgets from './components/services/myBudgets';
+import WorkerJob from './components/ChahtBox/Chat/workerJob';
 
 
 
@@ -62,6 +64,9 @@ ReactDOM.render
               <PrivateRoute path="/myquotes" component={MyQuotes} />
               <PrivateRoute path="/userjobs" component={Jobs}/>
               <PrivateRoute path="/chat" component={Chat}/>
+              <PrivateRoute path="/mybudgets" component={MyBudgets}/>
+              <PrivateRoute path="/workerjob" component={WorkerJob}/>
+              
         </Switch>
       </Switch>
     </Router>

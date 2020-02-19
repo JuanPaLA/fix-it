@@ -1,15 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import React, { Component } from 'react';
 import axios from 'axios';
-// import Nav2 from './../nav/nav';
 import Footer from './../footer/footer';
 import './services.css';
 import { Link } from 'react-router-dom';
-import {  FormGroup, Label, Input } from 'reactstrap';
+import { Label } from 'reactstrap';
 import { UncontrolledCollapse } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getServices } from '../../redux/actions/serviceActions';
-import { logoutUser } from "../../redux/actions/authActions";
 import  PropTypes from 'prop-types';
 import jwt from 'jwt-decode' // import dependency
 

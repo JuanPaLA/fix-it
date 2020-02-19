@@ -52,6 +52,13 @@ router.get('/budgets/get/:id', (req, res) => {
     .then(budget => res.json(budget))
 });
 
+//@GET budget BY WORKER-ID
+router.get('/budgets/worker/', (req, res) => {
+  budgetModel.find({workerId: req.body.id})
+  .then(budget => 
+    res.json(budget))
+});
+
 //GET budget BY QUOTE-ID
 router.get('/budgets/quote/:quoteId', (req, res) => {
     budgetModel.find({ quoteId: req.params.quoteId, estado: true})
@@ -78,7 +85,7 @@ router.get('/budgets/user/:userId', (req, res) => {
 })
 
 
-// DELETE QUOTE
+// DELETE BUDGET
 router.delete('/budgets/delete/:id', (req, res, next) => {
     budgetModel.findByIdAndRemove({_id: req.params.id}, (error, data) => {
       if (error) {

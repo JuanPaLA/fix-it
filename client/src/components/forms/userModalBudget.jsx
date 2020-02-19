@@ -1,15 +1,13 @@
 import { Redirect } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { useState, Component } from 'react';
+import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input, Form, Row, Col, CustomInput } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getBudgetsByQuote, rejectBudget } from '../../redux/actions/budgetActions';
 import { deleteBudgetInQuote } from '../../redux/actions/quoteActions';
 import { postJob } from '../../redux/actions/jobActions';
 import  PropTypes from 'prop-types';
-import {withRouter} from "react-router-dom";
 import './userModalBudget.css';
-
 
 class UserModalBudget extends Component {
     constructor(props){

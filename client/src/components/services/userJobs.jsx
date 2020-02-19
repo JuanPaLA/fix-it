@@ -1,4 +1,3 @@
-import { Redirect } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import React, { Component } from 'react';
 import Footer from './../footer/footer';
@@ -36,6 +35,7 @@ class Jobs extends Component {
     }
 
     async selectingJobChat(jobId){        
+        if(jobId != this.state.jobId)
         this.setState({
             jobId: jobId
         })

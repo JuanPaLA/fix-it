@@ -16,12 +16,31 @@ const io = socketio(server)
 /* --------- sockets methods -----------*/
 io.on('connection', (socket) => {
   console.log('new user connected')
+  //SECOND TRAY FROM WORKER-CHAT
+  socket.on('mandar', (data) => {
+    socket.join(data.jobId)
+    const messageModel2 = require('./model/messages');
+    const mensaje = new messageModel2 ({
+      jobId: data.jobId,
+      emiter: data.emiter,
+      message: data.message
+    })
+    messageModel2.create(mensaje)
+
+    // modifico el chatId para que contenga el nuevo mensaje
+    const jobModel = require('./model/jobs');
+    jobModel.findOneAndUpdate({_id: mensaje.jobId}, 
+      {$addToSet: 
+        {messages:{$each: [mensaje]}}}, {new: true})
+    .exec((true))
+    return socket.broadcast.to(mensaje.jobId).emit('salida', (mensaje))    
+  })
 
 
+  //FIRST TRAY
   socket.on("input", (message, emiter, job) => {
     //creo un canal-room 
     socket.join(message.job)
-    
 
     //CREO objeto mensaje para guardar luego en dbs
       const messageModel = require('./model/messages');
@@ -41,7 +60,6 @@ io.on('connection', (socket) => {
       .exec((true))
 
       return socket.broadcast.to(mensaje.jobId).emit('output', (mensaje))
-      
       
    })
   

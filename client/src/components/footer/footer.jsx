@@ -74,7 +74,7 @@ class Footer extends Component {
                 <NavItem>
                 <NavLink>
                     <Link to="/userjobs">
-                        Jobs
+                        Fixies!
                     </Link>
                 </NavLink>
                 </NavItem>

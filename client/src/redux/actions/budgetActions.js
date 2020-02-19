@@ -3,7 +3,8 @@ import {
     POST_BUDGET, 
     DELETE_BUDGET_BY_QUOTE,
     REJECT_BUDGET,
-    GET_BUDGET_BY_ID
+    GET_BUDGET_BY_ID,
+    GET_BUDGET_BY_WORKERID
 } from './types';
 
 export const getBudgetsByQuote = (id) => async dispatch => {
@@ -24,6 +25,19 @@ export const getBudgetById = (id) => async dispatch => {
 
     dispatch({
         type: GET_BUDGET_BY_ID,
+        payload: datos
+    });
+};
+
+export const getBudgetByWorkerId = (id) => async dispatch => {
+    var datos = await fetch(`http://localhost:5000/api/budgets/worker/${id}`)
+    .then(datos => 
+        datos.json())
+    .catch(err => 
+        console.log("error on BudgetActionReducer"));
+
+    dispatch({
+        type: GET_BUDGET_BY_WORKERID,
         payload: datos
     });
 };
