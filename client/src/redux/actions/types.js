@@ -16,6 +16,7 @@ export const POST_BUDGET = 'POST_BUDGET';
 export const GET_BUDGET_BY_QUOTE = 'GET_BUDGET_BY_QUOTE';
 export const DELETE_BUDGET_BY_QUOTE = 'DELETE_BUDGET_BY_QUOTE';
 export const REJECT_BUDGET = 'REJECT_BUDGET';
+export const DELETE_BUDGET = 'DELETE_BUDGET';
 
 export const GET_JOBS = 'GET_JOBS';
 export const POST_JOB = 'POST_JOB';

@@ -34,9 +34,7 @@ class App extends Component {
           </h6>
         </div>
 
-        <Link to="/chat">
-          Chat
-        </Link>
+        <div><br/></div>
        
         <div className="container-fluid">
           <div className="row">

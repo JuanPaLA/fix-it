@@ -53,27 +53,28 @@ router.get('/budgets/get/:id', (req, res) => {
 });
 
 //@GET budget BY WORKER-ID
-router.get('/budgets/worker/', (req, res) => {
-  budgetModel.find({workerId: req.body.id})
+router.get('/budgets/worker/:workerId', (req, res) => {
+  budgetModel.find({ workerId : req.params.workerId })
   .then(budget => 
     res.json(budget))
 });
 
 //GET budget BY QUOTE-ID
-router.get('/budgets/quote/:quoteId', (req, res) => {
+router.get('/budgets/quote/:quoteId', (
+  req, res) => {
     budgetModel.find({ quoteId: req.params.quoteId, estado: true})
     .then(budget => res.json(budget))
     .catch(err => console.log("error gettting budgets by quoteId"))
 })
 
-//GET budget BY WORKER-ID
-router.get('/budgets/worker/:workerId', (req, res) => {
-    budgetModel.find({ workerId: req.params.workerId})
-    .then(budget => 
-      res.json(budget))
-    .catch(err => 
-      console.log("error gettting budgets by workerId"))
-})
+// //GET budget BY WORKER-ID
+// router.get('/budgets/worker/:workerId', (req, res) => {
+//     budgetModel.find({ workerId: req.params.workerId})
+//     .then(budget => 
+//       res.json(budget))
+//     .catch(err => 
+//       console.log("error gettting budgets by workerId"))
+// })
 
 //GET budget BY USER-ID
 router.get('/budgets/user/:userId', (req, res) => {
@@ -112,7 +113,7 @@ router.delete('/budgets/delete/byquote/:id', (req, res, next) => {
   })
 
 
-  //REJECT BUDGET BY QUOTEID
+//REJECT BUDGET BY QUOTEID
 router.put('/budgets/rejectbyquoteid/:id', (req, res) => {
   //CHANGING THE STATE OF BUDGET FROM TRUE TO FALSE
     budgetModel.findOneAndUpdate

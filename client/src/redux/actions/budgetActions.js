@@ -4,7 +4,9 @@ import {
     DELETE_BUDGET_BY_QUOTE,
     REJECT_BUDGET,
     GET_BUDGET_BY_ID,
-    GET_BUDGET_BY_WORKERID
+    GET_BUDGET_BY_WORKERID,
+    DELETE_BUDGET
+
 } from './types';
 
 export const getBudgetsByQuote = (id) => async dispatch => {
@@ -46,13 +48,15 @@ export const postBudget = (precio, quoteId, mensaje, workerId, userId, titulo) =
     //cabeceras
     var myInit = {
     method: 'POST',
-    body: JSON.stringify({precio, mensaje, quoteId, workerId, userId, titulo}), 
+    body: JSON.stringify({precio, quoteId, mensaje,  workerId, userId, titulo}), 
     mode: 'cors',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded', 
       'Content-Type': 'application/json'
     }
   };
+  console.log(myInit.body);
+  
     var urls = `http://localhost:5000/api/budgets/add/${quoteId}`;
     let resp = await fetch(urls, myInit)
         .then(res => 
@@ -87,6 +91,22 @@ export const rejectBudget = (id) => async dispatch => {
     var url = `http://localhost:5000/api/budgets/rejectbyquoteid/${id}`;
     let respo = await fetch(url, init)
     .then(res => res.json())
+
+    dispatch({
+        type: REJECT_BUDGET,
+        payload: respo
+    })
+}
+
+export const deleteBudget = (id) => async dispatch => {
+    var init = {
+        method: 'DELETE'
+    }
+
+    var url = `http://localhost:5000/api/budgets/delete/${id}`;
+    let respo = await fetch(url, init)
+    .then(res => 
+        res.json())
 
     dispatch({
         type: REJECT_BUDGET,

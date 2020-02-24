@@ -43,6 +43,7 @@ class MyQuotes extends Component {
         return(
             <div>                                
                 <div className="contenido">
+                <h4 style={{marginBottom: "2vh"}}>Your Quotes!</h4>
                 {this.state.quotes.map((elem, i) => (
                     <Row>
                     

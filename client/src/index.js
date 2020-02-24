@@ -25,7 +25,7 @@ import { setCurrentUser, logoutUser } from "../src/redux/actions/authActions";
 import PrivateRoute from "../src/routes/privateRoutes";
 import MyBudgets from './components/services/myBudgets';
 import WorkerJob from './components/ChahtBox/Chat/workerJob';
-
+import UserJob from './components/ChahtBox/Chat/userJob';
 
 
 // Check for token to keep user logged in
@@ -62,7 +62,7 @@ ReactDOM.render
               <PrivateRoute exact path="/budgets" component={Budgets} />
               <PrivateRoute exact path="/quotes/:id" component={Quotes} />
               <PrivateRoute path="/myquotes" component={MyQuotes} />
-              <PrivateRoute path="/userjobs" component={Jobs}/>
+              <PrivateRoute path="/userjobs" component={UserJob}/>
               <PrivateRoute path="/chat" component={Chat}/>
               <PrivateRoute path="/mybudgets" component={MyBudgets}/>
               <PrivateRoute path="/workerjob" component={WorkerJob}/>

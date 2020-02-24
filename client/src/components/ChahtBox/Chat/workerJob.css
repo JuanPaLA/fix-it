@@ -84,3 +84,45 @@
     width: 100%;
     margin: 0.5vh 1vw 1vh 1vw;
 }
+
+#messagesContainer{
+    width: 100%;
+}
+.userMes{
+    text-align: right;
+    color: black;
+    text-align: right;
+    margin-right: 1.5vw;
+}
+
+.userMes span{
+    background-color: hsl(120, 2%, 78%);
+    padding-left: 5vw;
+    padding-right: 5vw;
+    border-bottom-left-radius: 10%;
+    border-top-right-radius: 25%;
+    margin-bottom: 07.vh;
+    padding-top: 0.1vh;
+    padding-bottom: 0.1vh;
+    margin-bottom: 1.vh;
+    font-size: 0.92em;
+}
+
+.workerMes{
+    color: black;
+    text-align: left;
+    margin-LEFT: 1.5vw;    
+    font-style: oblique;
+}
+
+.workerMes span {
+    background-color: #e2e0e0;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    border-top-left-radius: 15%;
+    border-top-right-radius: 10%;
+    padding-top: 0.1vh;
+    padding-bottom: 0.1vh;
+    margin-bottom: 07.vh;
+    font-size: 0.92em;
+}

@@ -49,8 +49,10 @@ router.post('/jobs/add', (req, res) => {
 //GET JOB BY USER-ID
 router.get('/jobs/user/:userId', (req, res) => {
     jobModel.find({ userId: req.params.userId})
-    .then(job => res.json(job))
-    .catch(err => console.log("error gettting jobs by userId"))
+    .then(job => 
+        res.json(job))
+    .catch(err => 
+        console.log("error gettting jobs by userId"))
 })
 
 //GET JOB BY WORKER-ID

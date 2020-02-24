@@ -18,7 +18,8 @@ class ModalForm extends Component {
       precio: '',
       mensaje: '',
       plazo: '',
-      titulo: this.props.titulo
+      titulo: this.props.titulo,
+      workerId: ''
     }
     this.toggle = this.toggle.bind(this)
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -29,6 +30,7 @@ class ModalForm extends Component {
     const token = localStorage.getItem('jwtToken');
     const worker = jwt(token)
     const workerId = worker.id; 
+    this.setState({ workerId: workerId })
   }
 
   toggle(){
@@ -53,12 +55,8 @@ class ModalForm extends Component {
   }
 
   handleSubmit(event){
-    const token = localStorage.getItem('jwtToken');
-    const user = jwt(token)
-    const workerId = user.id;
     this.toggle();
-
-    this.props.postBudget(this.state.precio, this.props.quoteId, this.state.mensaje, this.props.userId, workerId, this.props.titulo)
+    this.props.postBudget(this.state.precio, this.props.quoteId, this.state.mensaje,  this.state.workerId, this.props.userId, this.props.titulo)
     //AGREGAR PUT-UPDATE SOBRE QUOTE
   }
 

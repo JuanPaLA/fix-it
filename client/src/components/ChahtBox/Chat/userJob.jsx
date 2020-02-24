@@ -2,15 +2,15 @@ import React, {useState, useEffect, Component} from 'react'
 import { Form, Input, Button, Container, Col, Row } from 'reactstrap';
 import '../../services/userJobs.css';
 import { connect } from 'react-redux';
-import { getJobByWorkerId } from "../../../redux/actions/jobActions";
+import { getJobsByUser } from "../../../redux/actions/jobActions";
 import { getJobById } from "../../../redux/actions/jobActions";
 import  PropTypes from 'prop-types';
-import WorkFooter from '../../footer/workFooter';
+import Footer from '../../footer/footer';
 import jwt from 'jwt-decode' // import dependency
 import './workerJob.css';
 import io from 'socket.io-client';
 
-class WorkerJob extends Component {
+class UserJob extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -19,21 +19,21 @@ class WorkerJob extends Component {
             selectedJob: [],
             jobs: [],
             input: '',
-            workerId: '',
+            userId: '',
             lastMessage: ''
         }
         this.selectingJobId = this.selectingJobId.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);        
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleKeyPress = this.handleKeyPress.bind(this);
     }
+
     async componentDidMount(){
         const token = localStorage.getItem('jwtToken');
-        const worker = jwt(token)
-        const workerId = worker.id; 
-        await this.props.getJobByWorkerId(workerId)
+        const user = jwt(token)
+        const userId = user.id; 
+        await this.props.getJobsByUser(userId)
         this.setState({
-            workerId: workerId,
+            userId: userId,
             jobs: this.props.job
         })
         let server = "http://localhost:5000";
@@ -72,7 +72,7 @@ class WorkerJob extends Component {
         event.preventDefault();
         var jobId = this.state.selectedJobId;
         var message = this.state.input;
-        var emiter = this.state.workerId;
+        var emiter = this.state.userId;
         this.socket.emit('mandar', ({jobId, emiter, message}))
         this.setState({
             input: ''
@@ -82,7 +82,7 @@ class WorkerJob extends Component {
             selectedChatMessages: this.props.job.messages
         })
         this.socket.on('salida', mensaje =>{
-            if(mensaje.message !== this.state.lastMessage){
+            if(mensaje.message != this.state.lastMessage){
                 var joined = this.state.selectedChatMessages.concat([mensaje])
                 console.log(mensaje)
                 this.setState({
@@ -94,14 +94,8 @@ class WorkerJob extends Component {
             }
          
         })
+        
     }
-
-    handleKeyPress (event) {
-        event.preventDefault();
-        if(event.key === 'Enter'){
-          console.log('enter press here! ')
-        }
-      }
 
     handleInputChange(event) {
         this.setState({
@@ -109,12 +103,11 @@ class WorkerJob extends Component {
         });
     }
 
-
     render(){
         return(
             <div>
                 <div className="content">
-                <h4>Your Jobs</h4>   
+                <h4>Your Fixies!</h4>   
                 <Container fluid id="chatswrapper">
 
                 <Row >
@@ -132,9 +125,9 @@ class WorkerJob extends Component {
                         <Container fluid>                        
                         <Row fluid id="bodyChat">
                         
-                       <div fluid id="messagesContainer">
+                        <div fluid id="messagesContainer">
                         {this.state.selectedChatMessages.map((mes, i)=>(
-                            mes.emiter === this.state.workerId ? 
+                            mes.emiter === this.state.userId ? 
                             (
                                 <div className="userMes">
                                     <span>{mes.message} </span><br></br> 
@@ -144,25 +137,17 @@ class WorkerJob extends Component {
                                     <span>{mes.message} </span><br></br> 
                                 </div> 
                             )
-                        ))}
-                        {}
-                        {/* <div className="userMes">
-                                    <span>{this.state.lastMessage.message} </span><br></br> 
-                        </div>   */}
-
-                        </div>
-                        
+                        ))}                                                
+                        </div>                    
                         </Row>
                         <Row fluid id="textArea">
                             <Input type="textarea" 
                             value={this.state.input}
-                            onKeyPress={event => event.key === 'Enter' ? this.handleSubmit : null}
                             onChange={this.handleInputChange}>
                             </Input>
                         </Row>
                         <Row fluid id="submiter">
                             <Button 
-                            onKeyPress={event => event.key === 'Enter' ? this.handleSubmit : null}
                             onClick={this.handleSubmit}>
                             SEND
                             </Button>
@@ -173,16 +158,16 @@ class WorkerJob extends Component {
                 </Container>
                 </div>
                 <div>
-                    <WorkFooter/>
+                    <Footer/>
                 </div>
             </div>
         )
     }
 }
 
-WorkerJob.propTypes = {
+UserJob.propTypes = {
     job: PropTypes.array.isRequired,
-    getJobByWorkerId: PropTypes.func.isRequired,
+    getJobsByUser: PropTypes.func.isRequired,
     getJobById: PropTypes.func.isRequired 
 }
 
@@ -191,4 +176,4 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps,
-    {getJobByWorkerId, getJobById})(WorkerJob);
+    {getJobsByUser, getJobById})(UserJob);

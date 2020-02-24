@@ -81,8 +81,10 @@ export const getJobsByBudget = (id) => async dispatch => {
 
 export const getJobsByUser = (id) => async dispatch => {
     var datos = await fetch(`http://localhost:5000/api/jobs/user/${id}`)
-    .then(datos => datos.json())
-    .catch(err => console.log(err));
+    .then(datos => 
+        datos.json())
+    .catch(err => 
+        console.log(err));
 
     dispatch({
         type: GET_JOBS_BY_USER,

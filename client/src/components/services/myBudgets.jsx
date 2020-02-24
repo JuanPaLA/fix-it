@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import WorkFooter from '../footer/workFooter';
 import './myBudget.css'
 import { connect } from 'react-redux';
-import { getBudgetByWorkerId } from '../../redux/actions/budgetActions';
+import { getBudgetByWorkerId, deleteBudget } from '../../redux/actions/budgetActions';
 import  PropTypes from 'prop-types';
 import jwt from 'jwt-decode' // import dependency
 import { Card, Button, CardText,  Row, Col, CardHeader } from 'reactstrap';
@@ -15,13 +15,14 @@ class MyBudgets extends Component {
             workerId : '',
             budget: []
         }
+        this.toggle = this.toggle.bind(this);
     }
 
     async componentDidMount(){
         const token = localStorage.getItem('jwtToken');
         const worker = jwt(token)
         const workerId = worker.id; 
-        await this.props.getBudgetByWorkerId(workerId)
+        await this.props.getBudgetByWorkerId(worker.id)
         console.log(workerId)
         console.log(this.props)
         this.setState({
@@ -29,13 +30,18 @@ class MyBudgets extends Component {
         })
     }
     
+    toggle(id){
+        this.props.deleteBudget(id);
+        window.location.reload();
+    }
 
     render(){
         console.log(this.props)
         return(
-            <div>
+            <div>                
             <div className="mybudgetContent">
-                {this.state.budget.map((elem, i) => (
+            <h4 style={{marginBottom: "2vh"}}>Your Budgets!</h4>
+                {this.props.budget.map((elem, i) => (
                     <Row>
                         <Card className="divcarder">
                             <CardHeader className="cardhead">
@@ -44,12 +50,20 @@ class MyBudgets extends Component {
                             <Row>
                                 <Col>
                             <CardText>
-                                Budget: {elem.precio}
+                                <span style={{fontWeight: 600}}>
+                                Budget: 
+                                </span>
+                                <span style={{color: "red"}}>
+                                {elem.precio}
+                                </span>
                             </CardText>
                             </Col>
                             <Col>
                             <CardText>
-                                State: {String(!elem.estado)}
+                            <span style={{fontWeight: 600}}>
+                            State: 
+                                </span>
+                                  {String(!elem.estado)}
                             </CardText>
                             </Col>
                             </Row>
@@ -57,8 +71,9 @@ class MyBudgets extends Component {
                                 <Col>
                                 
                                 </Col>
-                                <Col>
-                                <Button 
+                                <Col style={{width: "50%", textAlign: "center"}}>
+                                <Button style={{margin: "1vh 5vw 1vh 0 "}}
+                                    onClick={this.toggle.bind(this, `${elem._id}`)}
                                     color="danger">
                                         Delete
                                 </Button>              
@@ -80,9 +95,10 @@ class MyBudgets extends Component {
 MyBudgets.propTypes = {
     getBudgetByWorkerId: PropTypes.func.isRequired,
     budget: PropTypes.array.isRequired,
+    deleteBudget: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
     budget: state.budget.budgets
 })
-export default connect(mapStateToProps, {getBudgetByWorkerId}) (MyBudgets);
+export default connect(mapStateToProps, {getBudgetByWorkerId, deleteBudget}) (MyBudgets);
